@@ -30,7 +30,7 @@ Copy `.env.example` to `.env` and set the existing GA4 measurement ID:
 PUBLIC_GA4_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
 
-The analytics script is omitted when this value is blank, so local development does not pollute production reporting.
+The analytics script is omitted when this value is blank, so local development does not pollute production reporting. Local and staging builds should use `PUBLIC_SITE_ENV=staging`; production must explicitly set `PUBLIC_SITE_ENV=production`. Staging builds receive `noindex` metadata and a crawler-blocking `robots.txt` automatically.
 
 ## Deployment
 
@@ -40,6 +40,8 @@ GitHub Actions verifies every push to `main`. The final Hostinger deployment ste
 - Build: `pnpm build`
 - Publish directory: `dist`
 - Node.js: 22
+- Staging environment: `PUBLIC_SITE_ENV=staging`
+- Production environment: `PUBLIC_SITE_ENV=production`
 
 Do not commit Hostinger credentials or `.env` files. Add secrets in GitHub or Hostinger’s deployment settings.
 

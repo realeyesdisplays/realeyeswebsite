@@ -19,6 +19,7 @@ const {
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const gaId = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID;
+const isProduction = import.meta.env.PUBLIC_SITE_ENV === 'production';
 ---
 
 <!doctype html>
@@ -28,6 +29,7 @@ const gaId = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    {!isProduction && <meta name="robots" content="noindex, nofollow, noarchive" />}
     <meta name="theme-color" content="#e23d3d" />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
