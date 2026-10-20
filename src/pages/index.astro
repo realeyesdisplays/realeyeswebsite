@@ -104,6 +104,7 @@ const strengths = [
 <style>
   .home-hero {
     position: relative;
+    width: 100%;
     height: 765px;
     overflow: hidden;
     background: #1c1c1c;
@@ -144,7 +145,7 @@ const strengths = [
   .hero-actions {
     position: absolute;
     right: 0;
-    bottom: 85px;
+    bottom: 80px;
     left: 0;
   }
 
@@ -154,6 +155,7 @@ const strengths = [
     grid-template-columns: 40% 60%;
     min-height: 595px;
     margin-top: 10px;
+    width: min(calc(100% - 20px), calc(var(--content) - 20px));
     overflow: hidden;
     border-radius: 12px;
     color: #fff;
@@ -260,9 +262,20 @@ const strengths = [
   }
 
   .solution-image :global(img) {
-    width: 100%;
-    height: 340px;
-    object-fit: contain;
+    display: block;
+    margin-inline: auto;
+    height: auto;
+  }
+
+  .solution-card:first-child .solution-image :global(img) {
+    width: auto;
+    height: 309px;
+  }
+
+  .solution-card:last-child .solution-image :global(img) {
+    width: calc(100% + 32px);
+    max-width: none;
+    margin-inline: -16px;
   }
 
   .solution-body {
@@ -322,14 +335,14 @@ const strengths = [
 
   .showcase :global(img) {
     width: 100%;
-    max-height: 690px;
-    object-fit: cover;
+    height: auto;
   }
 
   .contact-panel {
     display: grid;
     grid-template-columns: 46% 54%;
     gap: 20px;
+    width: min(calc(100% - 20px), calc(var(--content) - 20px));
     margin-top: 30px;
     border-radius: 20px;
     padding: 30px;
@@ -428,8 +441,11 @@ const strengths = [
     }
 
     .solution-image :global(img) {
-      height: 310px;
+      max-width: 100%;
     }
+
+    .solution-card:first-child .solution-image :global(img) { height: 278px; }
+    .solution-card:last-child .solution-image :global(img) { width: calc(100% + 32px); }
 
     .testimonial {
       padding: 55px 28px;
