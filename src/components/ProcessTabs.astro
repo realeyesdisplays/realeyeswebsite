@@ -1,0 +1,148 @@
+---
+import { Image } from 'astro:assets';
+
+interface ProcessItem {
+  label: string;
+  text: string;
+  image: ImageMetadata;
+}
+
+interface Props {
+  items: ProcessItem[];
+  intro: string;
+}
+
+const { items, intro } = Astro.props;
+---
+
+<section class="process soft-panel" data-process>
+  <h2 data-reveal="left">Our Proven Process</h2>
+  <p class="process-intro" data-reveal="left">{intro}</p>
+  <p class="process-note">We’ve refined our process over the years for maximum efficiency, accurate setup, and beautiful displays.</p>
+  <div class="process-tabs" role="tablist" aria-label="Our process">
+    {items.map((item, index) => (
+      <button type="button" role="tab" aria-selected={index === 0 ? 'true' : 'false'} data-process-button>{item.label}</button>
+    ))}
+  </div>
+  <div class="process-panels">
+    {items.map((item, index) => (
+      <div class="process-panel" role="tabpanel" hidden={index !== 0} data-process-panel>
+        <Image src={item.image} alt="" loading="lazy" />
+        <p>{item.text}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-process]').forEach((process) => {
+    const buttons = [...process.querySelectorAll<HTMLButtonElement>('[data-process-button]')];
+    const panels = [...process.querySelectorAll<HTMLElement>('[data-process-panel]')];
+    buttons.forEach((button, index) => button.addEventListener('click', () => {
+      buttons.forEach((item, itemIndex) => item.setAttribute('aria-selected', String(itemIndex === index)));
+      panels.forEach((panel, panelIndex) => panel.hidden = panelIndex !== index);
+    }));
+  });
+</script>
+
+<style>
+  .process h2 {
+    margin-bottom: 20px;
+    color: var(--red);
+    font-size: clamp(2.2rem, 4vw, 3rem);
+  }
+
+  .process-intro {
+    font-size: 23px;
+    font-weight: 600;
+  }
+
+  .process-note {
+    margin: 45px 20px 32px;
+    color: var(--red);
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .process-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 16px 20px 0;
+    background: var(--charcoal);
+  }
+
+  .process-tabs button {
+    flex: 1 1 150px;
+    min-height: 64px;
+    border: 0;
+    padding: 10px;
+    color: #fff;
+    background: transparent;
+    font-size: 17px;
+    cursor: pointer;
+  }
+
+  .process-tabs button[aria-selected='true'] {
+    border-radius: 7px 7px 0 0;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  .process-panels {
+    border: 1px solid var(--ink);
+    background: #fff;
+  }
+
+  .process-panel {
+    display: grid;
+    grid-template-columns: 32% 1fr;
+    align-items: center;
+    gap: 30px;
+    min-height: 260px;
+    padding: 25px 40px;
+  }
+
+  .process-panel[hidden] {
+    display: none;
+  }
+
+  .process-panel :global(img) {
+    width: 100%;
+    max-height: 190px;
+    object-fit: contain;
+  }
+
+  .process-panel p {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 767px) {
+    .process-note {
+      margin: 30px 0 24px;
+    }
+
+    .process-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 8px;
+    }
+
+    .process-tabs button {
+      min-height: 55px;
+      font-size: 14px;
+    }
+
+    .process-panel {
+      grid-template-columns: 1fr;
+      min-height: 430px;
+      padding: 24px;
+    }
+
+    .process-panel p {
+      font-size: 18px;
+    }
+  }
+</style>

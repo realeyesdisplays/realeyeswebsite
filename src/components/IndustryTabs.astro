@@ -1,0 +1,215 @@
+---
+import { Image } from 'astro:assets';
+
+interface TabItem {
+  label: string;
+  title: string;
+  description: string;
+  image: ImageMetadata;
+  imageAlt: string;
+  icons: ImageMetadata[];
+}
+
+interface Props {
+  tabs: TabItem[];
+  id: string;
+}
+
+const { tabs, id } = Astro.props;
+---
+
+<section class="industry-tabs" data-tabs>
+  <div class="tab-list" role="tablist" aria-label="Industries">
+    {tabs.map((tab, index) => (
+      <button
+        id={`${id}-tab-${index}`}
+        type="button"
+        role="tab"
+        aria-selected={index === 0 ? 'true' : 'false'}
+        aria-controls={`${id}-panel-${index}`}
+        tabindex={index === 0 ? '0' : '-1'}
+        data-tab-button
+      >
+        {tab.label}
+      </button>
+    ))}
+  </div>
+
+  <div class="tab-panels">
+    {tabs.map((tab, index) => (
+      <article
+        id={`${id}-panel-${index}`}
+        class="industry-panel"
+        role="tabpanel"
+        aria-labelledby={`${id}-tab-${index}`}
+        hidden={index !== 0}
+        data-tab-panel
+      >
+        <div class="industry-visual">
+          <div class="icon-row" aria-hidden="true">
+            {tab.icons.map((icon) => <Image src={icon} alt="" loading="lazy" />)}
+          </div>
+          <Image class="industry-image" src={tab.image} alt={tab.imageAlt} loading="lazy" quality={84} />
+        </div>
+        <div class="industry-text">
+          <h2>{tab.title}</h2>
+          <p>{tab.description}</p>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((tabs) => {
+    const buttons = [...tabs.querySelectorAll<HTMLButtonElement>('[data-tab-button]')];
+    const panels = [...tabs.querySelectorAll<HTMLElement>('[data-tab-panel]')];
+    const activate = (index: number) => {
+      buttons.forEach((button, buttonIndex) => {
+        const selected = buttonIndex === index;
+        button.setAttribute('aria-selected', String(selected));
+        button.tabIndex = selected ? 0 : -1;
+      });
+      panels.forEach((panel, panelIndex) => panel.hidden = panelIndex !== index);
+    };
+
+    buttons.forEach((button, index) => {
+      button.addEventListener('click', () => activate(index));
+      button.addEventListener('keydown', (event) => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        let next = index;
+        if (event.key === 'ArrowRight') next = (index + 1) % buttons.length;
+        if (event.key === 'ArrowLeft') next = (index - 1 + buttons.length) % buttons.length;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = buttons.length - 1;
+        activate(next);
+        buttons[next]?.focus();
+      });
+    });
+  });
+</script>
+
+<style>
+  .industry-tabs {
+    margin-top: -1px;
+  }
+
+  .tab-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 70px 10% 12px;
+    color: #fff;
+    background: var(--ink);
+  }
+
+  .tab-list button {
+    min-width: 170px;
+    min-height: 78px;
+    border: 1px solid #0c0c0c;
+    padding: 12px 18px;
+    color: #fff;
+    background: var(--ink);
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .tab-list button[aria-selected='true'],
+  .tab-list button:hover {
+    color: var(--ink);
+    background: #fff;
+  }
+
+  .tab-panels {
+    min-height: 490px;
+    padding: 80px 5% 45px;
+  }
+
+  .industry-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 30px;
+    max-width: 1180px;
+    margin-inline: auto;
+  }
+
+  .industry-panel[hidden] {
+    display: none;
+  }
+
+  .icon-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    min-height: 82px;
+    margin-bottom: 12px;
+  }
+
+  .icon-row :global(img) {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+  }
+
+  .industry-image :global(img),
+  :global(.industry-image) {
+    width: 100%;
+    max-height: 320px;
+    object-fit: contain;
+  }
+
+  .industry-text h2 {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 3px solid var(--red);
+    font-size: clamp(2rem, 3vw, 2.8rem);
+  }
+
+  .industry-text p {
+    font-size: 20px;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 767px) {
+    .tab-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 25px 10px 10px;
+    }
+
+    .tab-list button {
+      min-width: 0;
+      min-height: 64px;
+      padding: 8px;
+      font-size: 12px;
+    }
+
+    .tab-panels {
+      min-height: 650px;
+      padding: 38px 20px;
+    }
+
+    .industry-panel {
+      grid-template-columns: 1fr;
+    }
+
+    .icon-row {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .icon-row :global(img) {
+      width: 52px;
+      height: 52px;
+    }
+
+    .industry-text p {
+      font-size: 17px;
+    }
+  }
+</style>

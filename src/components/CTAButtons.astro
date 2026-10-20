@@ -1,0 +1,89 @@
+---
+import { Image } from 'astro:assets';
+import newDisplay from '../assets/media/newdisplay.png';
+import rehabDisplay from '../assets/media/newdisplay2.png';
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<div class:list={['cta-buttons', { compact }]}>
+  <button class="cta-card float-on-hover" type="button" data-form="new" data-reveal="left">
+    <Image src={newDisplay} alt="New Displays or Design Services" loading="lazy" />
+    <span>We’ll guide you, then support you.</span><b aria-hidden="true">➤</b>
+  </button>
+  <button class="cta-card float-on-hover" type="button" data-form="rehab" data-reveal="right">
+    <Image src={rehabDisplay} alt="Rehab an existing system" loading="lazy" />
+    <span>Black screens? No support? We can help.</span><b aria-hidden="true">➤</b>
+  </button>
+</div>
+
+<style>
+  .cta-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px;
+    width: min(1200px, calc(100% - 40px));
+    margin-inline: auto;
+  }
+
+  .cta-card {
+    position: relative;
+    border: 0;
+    padding: 0 0 0 0;
+    overflow: visible;
+    color: #fff;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .cta-card img {
+    width: 100%;
+    max-height: 72px;
+    object-fit: contain;
+    object-position: left bottom;
+  }
+
+  .cta-card span {
+    display: block;
+    min-height: 40px;
+    margin: -13px 4% 0 11%;
+    padding: 10px 42px 9px 14px;
+    background: rgb(35 35 35 / 72%);
+    font-weight: 650;
+    text-align: center;
+  }
+
+  .cta-card b {
+    position: absolute;
+    right: 6%;
+    bottom: 4px;
+    color: #fff;
+    font-size: 30px;
+  }
+
+  .compact {
+    width: min(1100px, calc(100% - 40px));
+  }
+
+  @media (max-width: 767px) {
+    .cta-buttons {
+      grid-template-columns: 1fr;
+      gap: 34px;
+      width: calc(100% - 40px);
+    }
+
+    .cta-card img {
+      max-height: none;
+    }
+
+    .cta-card span {
+      margin-top: -5px;
+      font-size: 13px;
+    }
+  }
+</style>

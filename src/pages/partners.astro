@@ -1,0 +1,179 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import hero from '../assets/media/partner-banner.jpg';
+import avIcon from '../assets/media/icon-r-AV.png';
+import marketingIcon from '../assets/media/icon-r-MKTG.png';
+import itIcon from '../assets/media/icon-r-IT.png';
+import partnerBackground from '../assets/media/image1.jpg';
+
+const partners = [
+  {
+    title: 'Audio Visual Firms',
+    image: avIcon,
+    paragraphs: [
+      'When your clients see stunning, on-brand digital signage on the hardware you install, it makes your solutions even easier to sell. That’s where we come in. We specialize in creating beautiful, professional graphics and interactive designs that make your displays shine—helping you close more deals and increase margins.',
+      'Once the system is in place, we take over customer training and provide ongoing support, so you spend less time fielding tech questions and more time doing what you do best. We also pass along leads to trusted AV partners whenever possible, creating a true two-way partnership. With us on your team, your displays won’t just look good—they’ll look unforgettable.',
+    ],
+  },
+  {
+    title: 'Marketing & Ad Agencies',
+    image: marketingIcon,
+    paragraphs: [
+      'If your clients are asking about digital signage or interactive displays, we make it simple to add these solutions to your service lineup—without adding technical headaches. We follow your brand guides and creative direction to the letter, bringing your vision to life on high-impact displays that capture attention.',
+      'After installation, we handle all the customer training and technical support, so you can focus on delivering your next big campaign. You get to expand your capabilities, keep creative control, and offer clients an exciting new channel—all with a trusted partner behind the scenes making it happen.',
+      'Into digital advertising? Ask about our interactive ad system, where we build your system and hand you the keys for full ownership with no extra mark-ups or fees.',
+    ],
+  },
+  {
+    title: 'IT Firms',
+    image: itIcon,
+    paragraphs: [
+      'Whether your client needs a one-off digital signage solution or a fully customized interactive system, we’re ready to help you deliver. We make it easy to add high-quality displays to your product line—helping you meet client needs, differentiate your services, and boost revenue.',
+      'You can source the hardware and installation yourself, or let us take care of it. Either way, our professional design work ensures the finished display makes a strong impression. From eye-catching passive signage to advanced interactive systems, we provide the expertise, content creation, and ongoing support that turn “just another install” into a showcase project for your firm.',
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Partners | RealEyes Displays"
+  description="RealEyes Displays partners with AV firms, marketing agencies, and IT firms to deliver beautiful digital signage and interactive display experiences."
+  image={hero.src}
+>
+  <section class="partner-hero site-shell">
+    <Image src={hero} alt="Business partners shaking hands" loading="eager" quality={88} />
+  </section>
+  <section class="partner-intro site-shell">
+    <div class="red-band" data-reveal="up"><h1>We love making our partners look good</h1></div>
+    <p>When your clients need beautiful digital signage or interactive displays, we bring the wow factor<br />— and you get all the credit. You focus on your strengths, we’ll handle the rest.</p>
+  </section>
+
+  <section class="partner-list site-shell page-pad">
+    {partners.map((partner, index) => (
+      <article class="partner-row" data-reveal={index % 2 ? 'right' : 'left'}>
+        <Image src={partner.image} alt="" loading="lazy" />
+        <div>
+          <h2>{partner.title}</h2>
+          {partner.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <section class="partner-cta site-shell" style={`--partner-bg: url(${partnerBackground.src})`}>
+    <div class="partner-cta-card" data-reveal="up">
+      <h2>Let’s team up and make something amazing.</h2>
+      <p>Partner with us and give your clients displays they’ll brag about—without adding extra work for you.</p>
+      <button type="button" data-form="partner">Partner Inquiry Form <span aria-hidden="true">›</span></button>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .partner-hero {
+    height: 700px;
+    overflow: hidden;
+  }
+
+  .partner-hero :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .partner-intro {
+    margin-top: -36px;
+  }
+
+  .partner-intro > p {
+    margin: 20px auto 55px;
+    padding-inline: 30px;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .partner-row {
+    display: grid;
+    grid-template-columns: 16% 1fr;
+    gap: 45px;
+    align-items: center;
+    margin-bottom: 70px;
+  }
+
+  .partner-row > :global(img) {
+    width: 100%;
+    max-height: 210px;
+    object-fit: contain;
+  }
+
+  .partner-row h2 {
+    margin-bottom: 25px;
+    color: var(--red);
+    font-size: clamp(2.4rem, 4vw, 3.3rem);
+    font-weight: 500;
+  }
+
+  .partner-row p {
+    margin-bottom: 8px;
+    font-size: 20px;
+  }
+
+  .partner-cta {
+    display: flex;
+    min-height: 460px;
+    margin-top: 20px;
+    padding: 80px 30px;
+    background: #fff var(--partner-bg) left center / auto 100% no-repeat;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .partner-cta-card {
+    width: 52%;
+    padding: 20px;
+    background: #ddd;
+  }
+
+  .partner-cta-card h2 {
+    margin-bottom: 12px;
+    color: var(--red);
+    font-size: 22px;
+  }
+
+  .partner-cta-card p {
+    font-size: 18px;
+  }
+
+  .partner-cta-card button {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    font-size: 34px;
+    font-weight: 650;
+    cursor: pointer;
+  }
+
+  .partner-cta-card span {
+    display: inline-grid;
+    width: 38px;
+    height: 38px;
+    border: 4px solid var(--red);
+    border-radius: 10px;
+    color: var(--red);
+    place-items: center;
+  }
+
+  @media (max-width: 767px) {
+    .partner-hero { height: 350px; }
+    .partner-intro { margin-top: -18px; }
+    .partner-intro > p { font-size: 18px; }
+    .partner-row { grid-template-columns: 1fr; gap: 15px; }
+    .partner-row > :global(img) { width: 130px; }
+    .partner-row p { font-size: 17px; }
+    .partner-cta { min-height: 520px; padding: 220px 20px 20px; background-size: 100% auto; background-position: top; }
+    .partner-cta-card { width: 100%; }
+    .partner-cta-card button { font-size: 25px; }
+  }
+</style>

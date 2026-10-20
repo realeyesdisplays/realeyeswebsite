@@ -1,0 +1,244 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import IndustryHero from '../components/IndustryHero.astro';
+import IndustryTabs from '../components/IndustryTabs.astro';
+import ProcessTabs from '../components/ProcessTabs.astro';
+import GalleryCarousel from '../components/GalleryCarousel.astro';
+import CTAButtons from '../components/CTAButtons.astro';
+
+import hero from '../assets/media/passive-banner.jpg';
+import office from '../assets/media/office-1.png';
+import corporate from '../assets/media/corporative.png';
+import university from '../assets/media/university1.png';
+import senior from '../assets/media/senior-1.png';
+import church from '../assets/media/church-1.png';
+import clinic from '../assets/media/clinic-1.png';
+import player from '../assets/media/REPD_0008_RealEyes-Player-V6-Micro.png';
+import hardware from '../assets/media/REPD_0007_kiko.png';
+import consultation from '../assets/media/Consultation.png';
+import estimate from '../assets/media/Estimate-Order.png';
+import shipping from '../assets/media/Shipping.png';
+import installation from '../assets/media/Installation.png';
+import training from '../assets/media/Training.png';
+import slide1 from '../assets/media/slide1.jpg';
+import slide2 from '../assets/media/slide2.jpg';
+import slide3 from '../assets/media/slide3.jpg';
+import iconDirectory from '../assets/media/PasIcons_0016_REPD_0032_icuun-copy-4.png';
+import iconLobby from '../assets/media/PasIcons_0015_REPD_0033_icuun-copy-3.png';
+import iconConference from '../assets/media/PasIcons_0014_REPD_0034_icuun-copy-2.png';
+import iconCafe from '../assets/media/PasIcons_0004_REPD_0023_icuun-copy.png';
+import iconBreak from '../assets/media/PasIcons_0012_REPD_0036_icuun.png';
+import iconFacility from '../assets/media/PasIcons_0011_REPD_0037_icuun-copy-5.png';
+import iconEvents from '../assets/media/PasIcons_0007_REPD_0020_icuun-copy-4.png';
+import iconSchedule from '../assets/media/PasIcons_0006_REPD_0021_icuun-copy-3.png';
+
+const commonIcons = [iconDirectory, iconLobby, iconConference, iconCafe, iconBreak, iconFacility];
+const campusIcons = [iconEvents, iconSchedule, iconLobby, iconCafe, iconBreak, iconFacility];
+
+const industries = [
+  {
+    label: 'Office Buildings / High Rise',
+    title: 'Office Buildings / High Rise',
+    description: 'Mix tenant directory info with local area information. Enhance conference rooms with looping signage, then connect your anchor cafe with digital menu boards. Finally, communicate internally with break room displays and facilities dashboards to keep up on maintenance in real-time.',
+    image: office,
+    imageAlt: 'Passive signage in an office building',
+    icons: commonIcons,
+  },
+  {
+    label: 'Corporate Headquarters',
+    title: 'Corporate Headquarters',
+    description: 'Enhance communications in your corporate headquarters with a network of passive displays. Welcome important visitors who enter the lobby and provide professional info-tainment. Communicate staff meetings, HR updates and safety info through your break room TV, and much more.',
+    image: corporate,
+    imageAlt: 'Corporate headquarters digital signage',
+    icons: commonIcons,
+  },
+  {
+    label: 'University Campus',
+    title: 'University Campus',
+    description: 'Want more engagement with your campus TV system? Add flair to your TVs and keep students watching. Welcome visitors at the entrances, schedule important information and events through hallways, pull dynamically scheduled menu boards, connect emergency alerts, and send our software through dorm room TVs.',
+    image: university,
+    imageAlt: 'University campus signage',
+    icons: campusIcons,
+  },
+  {
+    label: 'Senior Living',
+    title: 'Senior Living',
+    description: 'We provide a gentle, reliable way to share updates throughout common areas and living spaces. Keep residents and visitors informed with daily menus, activity schedules, announcements, birthdays, anniversaries and readable, easy-to-manage content.',
+    image: senior,
+    imageAlt: 'Senior living digital signage',
+    icons: campusIcons,
+  },
+  {
+    label: 'Church / House of Worship',
+    title: 'Church / House of Worship',
+    description: 'A house of worship nowadays is a multi-faceted community space. Share service times, event schedules, and announcements in a clear and welcoming way—ideal for keeping members informed as they move through entryways, halls, and gathering spaces.',
+    image: church,
+    imageAlt: 'Church welcome signage',
+    icons: campusIcons,
+  },
+  {
+    label: 'Clinic & Personal Services',
+    title: 'Clinic & Health Services',
+    description: 'Whether you’re a veterinary practice, primary care, vision correction, plastic surgery and more, we’ll help visitors feel welcome, at ease, and educated on your services. Display wellness tips, insurance information, common questions, testimonials, QR codes, videos, and more.',
+    image: clinic,
+    imageAlt: 'Clinic digital signage',
+    icons: commonIcons,
+  },
+];
+
+const process = [
+  { label: 'Free Consultation', image: consultation, text: 'We’ll ask questions and plan your project. Your hardware and content will be defined. We’ll remove all blind spots so you’re comfortable and informed up front on the project process.' },
+  { label: 'Estimate & Order', image: estimate, text: 'We’ll create a formal estimate of costs for all hardware and services we’re providing, along with approximate delivery times. Order with confidence, and we’ll get to work for you.' },
+  { label: 'Player Setup & Shipping', image: shipping, text: 'Your RealEyes TV Players will be locked down, registered into your display portal, checked for all drivers and maintenance updates, configured for plug-and-play, and tested for 24 hours before shipping.' },
+  { label: 'Connect & Install', image: installation, text: 'TVs and hardware will be installed now, and connecting your RealEyes TV Player requires no technical knowledge to go live. Just connect HDMI, power, and internet, and your display is live.' },
+  { label: 'Training & Support', image: training, text: 'We monitor and support your RealEyes players and any hardware we provide. As long as the internet is connected, we can fix most issues remotely and guide your staff through anything that requires a local hand.' },
+];
+---
+
+<BaseLayout
+  title="Passive Digital Signage | RealEyes Displays"
+  description="Passive digital signage for offices, corporate headquarters, universities, senior living, churches, clinics, and large deployments."
+  image={hero.src}
+>
+  <IndustryHero image={hero} alt="Passive digital signage installed in an office lobby" />
+
+  <div class="red-band hero-band" data-reveal="up"><h1>One Platform - Endless Displays &amp; Happy Viewers</h1></div>
+  <div class="site-shell"><IndustryTabs id="passive-industries" tabs={industries} /></div>
+
+  <div class="red-band section-space" data-reveal="down"><h2>Turn ANY TV into a RealEyes Display</h2></div>
+  <section class="hardware-tabs site-shell" data-hardware-tabs>
+    <div class="hardware-buttons" role="tablist" aria-label="Display hardware">
+      <button type="button" role="tab" aria-selected="true" data-hardware-button>TV Player Box</button>
+      <button type="button" role="tab" aria-selected="false" data-hardware-button>TVs, Mounts, Kiosks, Video Walls, Installation</button>
+    </div>
+    <div class="hardware-panel" data-hardware-panel>
+      <Image src={player} alt="RealEyes TV Player" loading="lazy" />
+      <div>
+        <p class="red-copy">Connect the RealEyes TV Player. Connect Internet.<br /><strong>BE AMAZED.</strong></p>
+        <p>It’s the size of a cell phone. We spend countless hours vetting our player hardware to ensure maximum uptime, longevity, and power to drive all of your content. It works with any TV or projector. It’s pre-configured and pre-registered for your specific display. Just plug it in, and watch it go. <strong>Quality hardware meets quality service.</strong></p>
+      </div>
+    </div>
+    <div class="hardware-panel" hidden data-hardware-panel>
+      <Image src={hardware} alt="Kiosk and display hardware" loading="lazy" />
+      <div>
+        <p>We have access to most AV equipment, and we can be your turnkey provider if that’s easiest for you. We’ll support any hardware we provide.</p>
+        <p>Or let us help you save. Most clients source their own hardware and use their facilities team to install TVs and run cables. We’ll help spec what you need and happily work with an AV vendor you trust.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="site-shell section-space">
+    <ProcessTabs items={process} intro="Want to connect existing TVs? Our turnaround time is only 1–2 weeks to go live! PLUS, new customers get up to 5 animated, editable signage pages custom designed with your message and brand." />
+  </div>
+
+  <div class="red-band section-space" data-reveal="up"><h2>Scaling for large deployments?</h2></div>
+  <h2 class="scale-copy">No problem! We provide a scope of manageable milestones,<br />executing from start to finish.</h2>
+  <div class="site-shell"><GalleryCarousel images={[slide1, slide2, slide3]} label="Large deployment examples" /></div>
+
+  <section class="soft-panel site-shell more-help" data-reveal="up">
+    <h2>Don’t see your organization or the display type you need?</h2>
+    <p>Don’t worry! We support almost all industries and all signage displays that we deploy.</p>
+    <p>Consultations are free, easy and educational. <strong>We promise.</strong></p>
+    <div>Use the buttons below to schedule a call:</div>
+  </section>
+  <div class="site-shell cta-section"><CTAButtons /></div>
+</BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-hardware-tabs]').forEach((tabs) => {
+    const buttons = [...tabs.querySelectorAll<HTMLButtonElement>('[data-hardware-button]')];
+    const panels = [...tabs.querySelectorAll<HTMLElement>('[data-hardware-panel]')];
+    buttons.forEach((button, index) => button.addEventListener('click', () => {
+      buttons.forEach((item, itemIndex) => item.setAttribute('aria-selected', String(itemIndex === index)));
+      panels.forEach((panel, panelIndex) => panel.hidden = panelIndex !== index);
+    }));
+  });
+</script>
+
+<style>
+  .hero-band { margin-top: -35px; }
+
+  .hardware-tabs {
+    margin-top: 20px;
+    border: 1px solid #bbb;
+  }
+
+  .hardware-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    background: #ddd;
+  }
+
+  .hardware-buttons button {
+    min-height: 64px;
+    border: 0;
+    padding: 10px 35px;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .hardware-buttons button[aria-selected='true'] {
+    border-radius: 8px 8px 0 0;
+    background: #fff;
+  }
+
+  .hardware-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 45px;
+    min-height: 420px;
+    padding: 35px 60px;
+  }
+
+  .hardware-panel[hidden] { display: none; }
+  .hardware-panel :global(img) { width: 100%; max-height: 330px; object-fit: contain; }
+  .hardware-panel p { font-size: 20px; }
+  .red-copy { color: var(--red); }
+  .red-copy strong { display: inline-block; margin-top: 24px; }
+
+  .scale-copy {
+    margin: 45px 20px 30px;
+    color: var(--red);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    text-align: center;
+  }
+
+  .more-help {
+    margin-top: 35px;
+  }
+
+  .more-help h2 {
+    color: var(--red);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+  }
+
+  .more-help p {
+    margin-bottom: 8px;
+    font-size: 22px;
+  }
+
+  .more-help > div {
+    margin-top: 30px;
+    border-radius: 12px;
+    padding: 18px;
+    color: #fff;
+    background: var(--ink);
+    text-align: center;
+  }
+
+  .cta-section {
+    padding: 45px 0 5px;
+  }
+
+  @media (max-width: 767px) {
+    .hero-band { margin-top: -18px; }
+    .hardware-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+    .hardware-buttons button { padding: 8px; font-size: 13px; }
+    .hardware-panel { grid-template-columns: 1fr; padding: 25px 20px; }
+    .more-help { margin-inline: 10px; }
+    .more-help p { font-size: 18px; }
+  }
+</style>

@@ -1,0 +1,405 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import rootsBackground from '../assets/media/root-bg.jpg';
+import software from '../assets/media/software.png';
+import design from '../assets/media/wdesign.png';
+import device from '../assets/media/wdevice1.png';
+import support from '../assets/media/support.png';
+import stackIcon from '../assets/media/icon-rsoftware.png';
+import intuifaceBadge from '../assets/media/Group-3.png';
+import knack from '../assets/media/knack-logo-color.png';
+import hybrid from '../assets/media/Hybrid-Sync-Logo-Official-BR.png';
+import logo from '../assets/media/REDLogoOfficial-Blk-Transp.png';
+import designLoop from '../assets/media/Timelapse-Desk-720-10-White-GIF.gif';
+import deviceIcon from '../assets/media/icon-rdevice-1.png';
+import deviceCutout from '../assets/media/Q5ISbTD-scaled-depositphotos-bgremover-1.png';
+import peopleIcon from '../assets/media/icon-rdevice-3.png';
+
+const strengths = [[software, 'Enterprise Software'], [design, 'Expert Design'], [device, 'Device Support'], [support, 'People Support']] as const;
+---
+
+<BaseLayout
+  title="Our Roots | RealEyes Displays"
+  description="Discover the enterprise software, expert design, device support, and people-first service behind RealEyes Displays."
+  image={rootsBackground.src}
+>
+  <section class="roots-hero site-shell" style={`--roots-bg: url(${rootsBackground.src})`}>
+    <div class="roots-heading" data-reveal="left">
+      <h1>Our Roots</h1>
+      <p>Experience Our Strength</p>
+    </div>
+    <div class="roots-copy" data-reveal="right">
+      <h2>We delight Marketing Managers.<br />We give IT Managers some of their life back.</h2>
+      <p>Care for the system. Care for the people. It’s in our roots.</p>
+      <div class="strengths">
+        {strengths.map(([icon, label], index) => (
+          <div class="strength">
+            <Image src={icon} alt="" loading="lazy" />
+            <span>{label}</span>
+            {index < strengths.length - 1 && <b aria-hidden="true">+</b>}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="software-panel site-shell section-space" data-reveal="up">
+    <div class="software-title">
+      <Image src={stackIcon} alt="" loading="lazy" />
+      <h2>Enterprise<br />Software</h2>
+      <Image class="badge" src={intuifaceBadge} alt="Intuiface Creative Expert Platinum" loading="lazy" />
+    </div>
+    <div class="software-stack">
+      <h3>Here’s a few of the tools in our stack:</h3>
+      <p>Like a passionate woodworker, we trust our tools to bring life to our art. Our art is digital interactive signage.</p>
+      <div class="stack-logos">
+        <Image src={intuifaceBadge} alt="Intuiface" loading="lazy" />
+        <Image src={knack} alt="Knack" loading="lazy" />
+        <Image src={hybrid} alt="Hybrid Sync" loading="lazy" />
+        <Image src={logo} alt="RealEyes Displays" loading="lazy" />
+      </div>
+      <div class="stack-labels">
+        <span>Visual Experience,<br />Integration</span>
+        <span>Data, Portals,<br />Automation</span>
+        <span>Offline Data Sync</span>
+        <span>Passive Signage</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-split site-shell section-space">
+    <div class="feature-media" data-reveal="left"><Image src={designLoop} alt="Interactive display design in progress" loading="lazy" /></div>
+    <div class="feature-copy dark" data-reveal="right">
+      <h2><Image src={design} alt="" loading="lazy" /> Expert Design</h2>
+      <div class="black-card">
+        <p>It’s one thing to make a digital sign or kiosk perform a task. It’s another thing to make a visual impression. Whether it’s interactive storytelling or simply navigating a building, elegant design brings the emotional connection.</p>
+        <p>Clean, professional graphic design that integrates mixed media like videos, websites, images, motion graphics and documents are the key to giving LIFE to your content.</p>
+      </div>
+      <p class="red-card">Want to experience magic? You’ll see it firsthand when beautiful design ‘connects’ with your audience.</p>
+    </div>
+  </section>
+
+  <section class="support-panel site-shell section-space" data-reveal="up">
+    <h2><Image src={deviceIcon} alt="" loading="lazy" /> Device Support</h2>
+    <div class="support-grid">
+      <div>
+        <h3>“Great, I’d love to support more devices!”<br />…said no IT manager, ever.</h3>
+        <div class="black-card">
+          <p>If we provide the hardware for your display system, you can count on us to monitor it, and when things happen, WE take the first call.</p>
+          <p>Most support tickets we take are fixed without any involvement from IT. And if your IT staff is worth their weight in gold…that saves you a LOT of gold!</p>
+        </div>
+      </div>
+      <Image src={deviceCutout} alt="Supported display devices" loading="lazy" />
+    </div>
+  </section>
+
+  <section class="people-panel site-shell section-space" data-reveal="up">
+    <div class="people-empty"></div>
+    <div class="people-copy">
+      <h2><Image src={peopleIcon} alt="" loading="lazy" /> People Support</h2>
+      <h3>Have you ever had a good laugh on a support call?</h3>
+      <div class="red-card">
+        <p>We can’t say enough about the people we take care of. We’ve built a culture of support in our company, and we help solve challenges for our customers the same way we would for a family friend.</p>
+        <p>Another dream fulfilled. We’re on a roll today.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .roots-hero {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    min-height: 765px;
+    padding-top: 145px;
+    border-radius: 0 0 18px 18px;
+    color: #fff;
+    background: var(--ink) var(--roots-bg) center / cover no-repeat;
+  }
+
+  .roots-heading,
+  .roots-copy {
+    align-self: center;
+    padding: 35px;
+  }
+
+  .roots-heading h1 {
+    margin: 0;
+    font-size: clamp(3.5rem, 6vw, 5rem);
+  }
+
+  .roots-heading p {
+    font-size: 25px;
+    text-transform: uppercase;
+  }
+
+  .roots-copy h2 {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 450;
+  }
+
+  .roots-copy > p {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .strengths {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 36px;
+    margin-top: 60px;
+  }
+
+  .strength {
+    position: relative;
+    padding: 48px 10px 15px;
+    background: var(--red);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .strength :global(img) {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    width: 76px;
+    height: 76px;
+    object-fit: contain;
+    transform: translateX(-50%);
+  }
+
+  .strength b {
+    position: absolute;
+    top: 50%;
+    right: -27px;
+    color: #aaa;
+  }
+
+  .software-panel {
+    display: grid;
+    grid-template-columns: 28% 1fr;
+    border: 2px solid var(--red);
+    border-radius: 14px;
+    padding: 30px;
+  }
+
+  .software-title h2 {
+    color: var(--red);
+    font-size: 42px;
+    font-weight: 450;
+  }
+
+  .software-title > :global(img) {
+    width: 58px;
+  }
+
+  .software-title .badge,
+  .software-title :global(.badge) {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .software-stack h3 {
+    font-size: 31px;
+  }
+
+  .software-stack > p {
+    font-size: 23px;
+    font-weight: 600;
+  }
+
+  .stack-logos,
+  .stack-labels {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+
+  .stack-logos {
+    align-items: center;
+    min-height: 210px;
+  }
+
+  .stack-logos :global(img) {
+    width: 100%;
+    max-height: 170px;
+    object-fit: contain;
+  }
+
+  .stack-labels {
+    border-radius: 12px;
+    padding: 20px;
+    background: var(--red);
+  }
+
+  .stack-labels span {
+    padding: 18px 8px;
+    background: #eee;
+    text-align: center;
+  }
+
+  .feature-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    border: 2px solid var(--charcoal);
+    border-radius: 15px;
+  }
+
+  .feature-media {
+    display: grid;
+    min-height: 600px;
+    padding: 20px;
+    place-items: end center;
+  }
+
+  .feature-media :global(img) {
+    width: 100%;
+  }
+
+  .feature-copy {
+    padding: 40px 25px;
+  }
+
+  .feature-copy.dark {
+    color: #fff;
+    background: var(--charcoal);
+  }
+
+  .feature-copy h2,
+  .support-panel h2,
+  .people-copy h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: inherit;
+    font-size: 42px;
+    font-weight: 450;
+  }
+
+  .feature-copy h2 :global(img),
+  .support-panel h2 :global(img),
+  .people-copy h2 :global(img) {
+    width: 62px;
+    height: 62px;
+    object-fit: contain;
+  }
+
+  .black-card {
+    border-radius: 10px;
+    padding: 25px;
+    color: #fff;
+    background: #202020;
+    font-size: 20px;
+  }
+
+  .red-card {
+    border-radius: 8px;
+    padding: 24px;
+    color: #fff;
+    background: var(--red);
+    font-size: 20px;
+  }
+
+  .support-panel {
+    padding: 55px;
+    border-radius: 14px;
+    background: var(--soft);
+  }
+
+  .support-panel h2 {
+    color: var(--red);
+  }
+
+  .support-grid {
+    display: grid;
+    grid-template-columns: 1fr 34%;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .support-grid > :global(img) {
+    width: 100%;
+  }
+
+  .people-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 620px;
+    border: 2px solid var(--charcoal);
+    border-radius: 15px;
+    padding: 55px 30px;
+  }
+
+  .people-copy h2 {
+    color: var(--red);
+  }
+
+  .people-copy h3 {
+    margin: 70px 0 40px;
+    font-size: 28px;
+  }
+
+  @media (max-width: 767px) {
+    .roots-hero {
+      grid-template-columns: 1fr;
+      min-height: 1050px;
+      padding-top: 40px;
+      background-position: 30% center;
+    }
+
+    .roots-heading,
+    .roots-copy {
+      padding: 25px 20px;
+    }
+
+    .strengths {
+      grid-template-columns: 1fr 1fr;
+      gap: 58px 26px;
+    }
+
+    .strength b {
+      display: none;
+    }
+
+    .software-panel,
+    .feature-split,
+    .support-grid,
+    .people-panel {
+      grid-template-columns: 1fr;
+    }
+
+    .software-panel {
+      margin-inline: 10px;
+      padding: 24px 16px;
+    }
+
+    .stack-logos,
+    .stack-labels {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .feature-split,
+    .support-panel,
+    .people-panel {
+      margin-inline: 10px;
+    }
+
+    .feature-media {
+      min-height: 380px;
+    }
+
+    .support-panel {
+      padding: 30px 20px;
+    }
+
+    .people-panel {
+      min-height: 550px;
+    }
+
+    .people-empty {
+      display: none;
+    }
+  }
+</style>

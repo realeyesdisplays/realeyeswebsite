@@ -1,0 +1,138 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/media/logo.png';
+---
+
+<footer class="site-shell footer-wrap">
+  <div class="footer-content">
+    <div class="footer-about">
+      <div class="footer-brand">
+        <Image src={logo} alt="" loading="lazy" />
+        <strong>RealEyes Displays</strong>
+      </div>
+      <p>Got a question? Our passive and interactive digital signage experts are here to help. Whether you need to purchase a new display, bring existing black screens to life, or discuss a vendor partnership, let’s get connected.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <span>Quick Link</span>
+      <a href="/">Home</a>
+      <a href="/our-roots/">Our Roots</a>
+      <a href="/passive-displays/">Passive Displays</a>
+      <a href="/interactive/">Interactive</a>
+      <a href="/partners/">Partners</a>
+      <a href="/contact-us/">Contact</a>
+      <a href="https://realeyes.playr.biz/" target="_blank" rel="noopener" data-analytics="client_login">Client Login</a>
+    </nav>
+  </div>
+  <div class="footer-wordmark" aria-hidden="true">REAL EYES DISPLAYS</div>
+</footer>
+
+<style>
+  .footer-wrap {
+    position: relative;
+    height: 410px;
+    margin-top: 90px;
+    overflow: hidden;
+    border-radius: 24px 24px 0 0;
+    background: var(--soft);
+  }
+
+  .footer-content {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(180px, .8fr);
+    gap: 60px;
+    padding: 50px 40px;
+  }
+
+  .footer-about {
+    max-width: 440px;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+
+  .footer-brand img {
+    width: 64px;
+    height: 52px;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .footer-brand strong {
+    font-size: 27px;
+  }
+
+  .footer-about p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .footer-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .footer-nav span {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+
+  .footer-nav a {
+    font-size: 16px;
+    text-decoration: none;
+  }
+
+  .footer-nav a:hover {
+    color: var(--red);
+  }
+
+  .footer-wordmark {
+    position: absolute;
+    right: 0;
+    bottom: -35px;
+    left: 0;
+    color: var(--red-bright);
+    font-size: clamp(4rem, 9.1vw, 8.2rem);
+    font-weight: 750;
+    line-height: .9;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 767px) {
+    .footer-wrap {
+      height: 620px;
+      margin: 55px 10px 0;
+      border-radius: 22px 22px 0 0;
+    }
+
+    .footer-content {
+      display: block;
+      padding: 38px 20px;
+    }
+
+    .footer-about {
+      max-width: none;
+    }
+
+    .footer-brand strong {
+      font-size: 24px;
+    }
+
+    .footer-nav {
+      margin-top: 62px;
+    }
+
+    .footer-wordmark {
+      bottom: -5px;
+      font-size: 2rem;
+    }
+  }
+</style>

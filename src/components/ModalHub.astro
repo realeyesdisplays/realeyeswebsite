@@ -1,0 +1,116 @@
+---
+const forms = {
+  new: 'https://forms.clickup.com/2246062/f/24hde-4077/RFT1LVLHDSN7YPKTEJ',
+  rehab: 'https://forms.clickup.com/2246062/f/24hde-4137/2CAZ1J3JULC1CKUQC7',
+  partner: 'https://forms.clickup.com/2246062/f/24hde-4177/OALMGBKH0OFJHUQ8B5',
+};
+---
+
+<dialog class="form-dialog" data-form-dialog aria-labelledby="form-dialog-title">
+  <div class="dialog-panel">
+    <div class="dialog-bar">
+      <h2 id="form-dialog-title" data-dialog-title>Contact RealEyes Displays</h2>
+      <button type="button" class="dialog-close" aria-label="Close form" data-dialog-close>×</button>
+    </div>
+    <iframe title="RealEyes Displays inquiry form" data-dialog-frame></iframe>
+  </div>
+</dialog>
+
+<script define:vars={{ forms }}>
+  const dialog = document.querySelector('[data-form-dialog]');
+  const frame = document.querySelector('[data-dialog-frame]');
+  const title = document.querySelector('[data-dialog-title]');
+  const labels = {
+    new: 'New Displays or Design Services',
+    rehab: 'Rehab an Existing System',
+    partner: 'Partner Inquiry',
+  };
+  let lastTrigger;
+
+  document.addEventListener('click', (event) => {
+    const target = event.target.closest('[data-form]');
+    if (!target || !dialog || !frame) return;
+    const key = target.dataset.form;
+    if (!forms[key]) return;
+    event.preventDefault();
+    lastTrigger = target;
+    frame.src = forms[key];
+    title.textContent = labels[key] ?? 'Contact RealEyes Displays';
+    document.body.classList.add('modal-open');
+    dialog.showModal();
+  });
+
+  const closeDialog = () => {
+    if (!dialog?.open) return;
+    dialog.close();
+    document.body.classList.remove('modal-open');
+    frame.src = 'about:blank';
+  };
+
+  document.querySelector('[data-dialog-close]')?.addEventListener('click', closeDialog);
+  dialog?.addEventListener('click', (event) => {
+    if (event.target === dialog) closeDialog();
+  });
+  dialog?.addEventListener('close', () => {
+    document.body.classList.remove('modal-open');
+    frame.src = 'about:blank';
+    lastTrigger?.focus();
+  });
+</script>
+
+<style>
+  .form-dialog {
+    width: min(960px, 95vw);
+    height: 90vh;
+    border: 0;
+    border-radius: 12px;
+    padding: 0;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 30px 100px rgb(0 0 0 / 45%);
+  }
+
+  .form-dialog::backdrop {
+    background: rgb(0 0 0 / 72%);
+    backdrop-filter: blur(4px);
+  }
+
+  .dialog-panel {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+  }
+
+  .dialog-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 18px;
+    color: #fff;
+    background: var(--ink);
+  }
+
+  .dialog-bar h2 {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  .dialog-close {
+    width: 42px;
+    height: 42px;
+    border: 0;
+    border-radius: 50%;
+    color: #fff;
+    background: var(--red);
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .form-dialog iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+</style>

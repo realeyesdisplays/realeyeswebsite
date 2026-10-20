@@ -1,0 +1,188 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/media/logo.png';
+
+const currentPath = Astro.url.pathname;
+const nav = [
+  ['Home', '/'],
+  ['Our Roots', '/our-roots/'],
+  ['Passive Displays', '/passive-displays/'],
+  ['Interactive', '/interactive/'],
+  ['Partners', '/partners/'],
+  ['Contact', '/contact-us/'],
+];
+const active = (href: string) => href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+---
+
+<header class="site-header" data-header>
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label="RealEyes Displays home">
+      <Image src={logo} alt="RealEyes Displays" loading="eager" />
+    </a>
+
+    <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation" data-menu-toggle>
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav id="primary-navigation" class="primary-nav" aria-label="Primary navigation" data-menu>
+      {nav.map(([label, href]) => (
+        <a href={href} class:list={{ active: active(href) }} aria-current={active(href) ? 'page' : undefined}>{label}</a>
+      ))}
+      <a href="https://realeyes.playr.biz/" target="_blank" rel="noopener" data-analytics="client_login">Client Login</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.querySelector<HTMLElement>('[data-menu]');
+
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    toggle.setAttribute('aria-label', open ? 'Open navigation' : 'Close navigation');
+    menu?.classList.toggle('is-open', !open);
+  });
+</script>
+
+<style>
+  .site-header {
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: 30;
+    pointer-events: none;
+  }
+
+  .header-inner {
+    position: relative;
+    width: min(100%, 1240px);
+    min-height: 154px;
+    margin-inline: auto;
+  }
+
+  .brand,
+  .primary-nav,
+  .menu-toggle {
+    pointer-events: auto;
+  }
+
+  .brand {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    width: 180px;
+    padding: 20px 26px 16px;
+    border-radius: 0 0 18px 18px;
+    background: #fff;
+  }
+
+  .brand img {
+    width: 100%;
+    height: auto;
+  }
+
+  .primary-nav {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    display: flex;
+    overflow: hidden;
+    border-radius: 0 0 16px 16px;
+    background: #fff;
+    box-shadow: 0 8px 28px rgb(0 0 0 / 8%);
+  }
+
+  .primary-nav a {
+    display: grid;
+    min-height: 50px;
+    padding: 0 21px;
+    place-items: center;
+    color: #111;
+    font-size: 17px;
+    font-weight: 450;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 150ms ease, background 150ms ease;
+  }
+
+  .primary-nav a:hover,
+  .primary-nav a:focus-visible,
+  .primary-nav a.active {
+    color: #fff;
+    background: var(--red);
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  @media (max-width: 1024px) {
+    .primary-nav a {
+      padding-inline: 13px;
+      font-size: 15px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .site-header {
+      position: relative;
+      height: 100px;
+      background: #fff;
+    }
+
+    .header-inner {
+      min-height: 100px;
+    }
+
+    .brand {
+      top: 14px;
+      left: 20px;
+      width: 78px;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    .menu-toggle {
+      position: absolute;
+      top: 28px;
+      right: 30px;
+      display: grid;
+      width: 45px;
+      height: 45px;
+      border: 0;
+      border-radius: 8px;
+      padding: 10px 9px;
+      background: var(--red);
+      cursor: pointer;
+      align-content: space-between;
+    }
+
+    .menu-toggle span {
+      display: block;
+      height: 4px;
+      border-radius: 4px;
+      background: #fff;
+    }
+
+    .primary-nav {
+      top: 88px;
+      right: 18px;
+      left: 18px;
+      display: none;
+      border-radius: 10px;
+      padding: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .primary-nav.is-open {
+      display: block;
+    }
+
+    .primary-nav a {
+      min-height: 46px;
+      border-radius: 6px;
+      justify-content: start;
+      padding-inline: 16px;
+    }
+  }
+</style>

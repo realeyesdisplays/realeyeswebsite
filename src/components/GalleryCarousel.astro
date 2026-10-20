@@ -1,0 +1,174 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  images: ImageMetadata[];
+  label: string;
+  dark?: boolean;
+  coverflow?: boolean;
+}
+
+const { images, label, dark = false, coverflow = false } = Astro.props;
+---
+
+<section class:list={['carousel', { dark, coverflow }]} aria-label={label} data-carousel>
+  <button class="carousel-arrow previous" type="button" aria-label="Previous image" data-carousel-prev>‹</button>
+  <div class="carousel-window">
+    <div class="carousel-track" data-carousel-track>
+      {images.map((image, index) => (
+        <figure class="carousel-slide" aria-hidden={index > 2 ? 'true' : 'false'}>
+          <Image src={image} alt={`${label} ${index + 1}`} loading="lazy" quality={82} />
+        </figure>
+      ))}
+    </div>
+  </div>
+  <button class="carousel-arrow next" type="button" aria-label="Next image" data-carousel-next>›</button>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((carousel) => {
+    const track = carousel.querySelector<HTMLElement>('[data-carousel-track]');
+    const slides = [...carousel.querySelectorAll<HTMLElement>('.carousel-slide')];
+    if (!track || slides.length < 2) return;
+    let index = 0;
+    let timer: number;
+    const visible = () => window.matchMedia('(max-width: 767px)').matches ? 1 : 3;
+    const render = () => {
+      const amount = 100 / visible();
+      const max = Math.max(0, slides.length - visible());
+      if (index > max) index = 0;
+      track.style.transform = `translateX(-${index * amount}%)`;
+      slides.forEach((slide, slideIndex) => {
+        const isVisible = slideIndex >= index && slideIndex < index + visible();
+        slide.setAttribute('aria-hidden', String(!isVisible));
+        slide.dataset.position = !isVisible
+          ? 'outside'
+          : visible() === 1 || slideIndex === index + 1
+            ? 'center'
+            : slideIndex === index
+              ? 'left'
+              : 'right';
+      });
+    };
+    const next = () => {
+      const max = Math.max(0, slides.length - visible());
+      index = index >= max ? 0 : index + 1;
+      render();
+    };
+    const previous = () => {
+      const max = Math.max(0, slides.length - visible());
+      index = index <= 0 ? max : index - 1;
+      render();
+    };
+    const start = () => timer = window.setInterval(next, 5000);
+    const stop = () => window.clearInterval(timer);
+    carousel.querySelector('[data-carousel-next]')?.addEventListener('click', () => { stop(); next(); start(); });
+    carousel.querySelector('[data-carousel-prev]')?.addEventListener('click', () => { stop(); previous(); start(); });
+    carousel.addEventListener('mouseenter', stop);
+    carousel.addEventListener('mouseleave', start);
+    carousel.addEventListener('focusin', stop);
+    carousel.addEventListener('focusout', start);
+    window.addEventListener('resize', render);
+    render();
+    start();
+  });
+</script>
+
+<style>
+  .carousel {
+    position: relative;
+    min-height: 350px;
+    padding: 35px 48px;
+  }
+
+  .carousel.dark {
+    background: #494949;
+  }
+
+  .carousel-window {
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 500ms ease;
+  }
+
+  .carousel-slide {
+    flex: 0 0 33.333%;
+    margin: 0;
+    padding: 10px;
+  }
+
+  .carousel-slide :global(img) {
+    width: 100%;
+    height: 280px;
+    border-radius: 6px;
+    object-fit: cover;
+  }
+
+  .coverflow .carousel-slide {
+    perspective: 900px;
+  }
+
+  .coverflow .carousel-slide :global(img) {
+    border: 3px solid #fff;
+    box-shadow: 0 18px 34px rgb(0 0 0 / 30%);
+    transition: opacity 500ms ease, transform 500ms ease;
+  }
+
+  .coverflow .carousel-slide[data-position='left'] :global(img) {
+    opacity: .78;
+    transform: perspective(800px) rotateY(16deg) scale(.84);
+    transform-origin: right center;
+  }
+
+  .coverflow .carousel-slide[data-position='center'] :global(img) {
+    position: relative;
+    z-index: 1;
+    transform: scale(1.04);
+  }
+
+  .coverflow .carousel-slide[data-position='right'] :global(img) {
+    opacity: .78;
+    transform: perspective(800px) rotateY(-16deg) scale(.84);
+    transform-origin: left center;
+  }
+
+  .carousel-arrow {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    width: 42px;
+    height: 70px;
+    border: 0;
+    color: currentColor;
+    background: transparent;
+    font-size: 48px;
+    line-height: 1;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  .dark .carousel-arrow {
+    color: #fff;
+  }
+
+  .previous { left: 5px; }
+  .next { right: 5px; }
+
+  @media (max-width: 767px) {
+    .carousel {
+      min-height: 330px;
+      padding-inline: 36px;
+    }
+
+    .carousel-slide {
+      flex-basis: 100%;
+    }
+
+    .carousel-slide :global(img) {
+      height: 250px;
+    }
+  }
+</style>

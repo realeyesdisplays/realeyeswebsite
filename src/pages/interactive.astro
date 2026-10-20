@@ -1,0 +1,205 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import IndustryHero from '../components/IndustryHero.astro';
+import IndustryTabs from '../components/IndustryTabs.astro';
+import ProcessTabs from '../components/ProcessTabs.astro';
+import GalleryCarousel from '../components/GalleryCarousel.astro';
+import CTAButtons from '../components/CTAButtons.astro';
+import VideoCard from '../components/VideoCard.astro';
+
+import hero from '../assets/media/interactive-display.jpg';
+import chamber from '../assets/media/chamerb1.png';
+import events from '../assets/media/eventshow1.png';
+import office from '../assets/media/office-highrise.png';
+import corporate from '../assets/media/office-hq.png';
+import university from '../assets/media/universitycamp.png';
+import church from '../assets/media/Church-1-1.png';
+import museum from '../assets/media/musem.png';
+import poster1 from '../assets/media/4ID_0056_play-1.png';
+import poster2 from '../assets/media/4ID_0057_play-2.png';
+import poster3 from '../assets/media/4ID_0058_play-3.png';
+import consultation from '../assets/media/Consultation.png';
+import contentGuideline from '../assets/media/Content-Guideline-pic-1.png';
+import designScope from '../assets/media/Design-Scope-1.png';
+import estimate from '../assets/media/Estimate-Order.png';
+import shipping from '../assets/media/Shipping.png';
+import installation from '../assets/media/Installation.png';
+import training from '../assets/media/Training.png';
+import intuifaceBg from '../assets/media/intuiface-bg.jpg';
+import intuifaceWhite from '../assets/media/intu-white.png';
+import intuifaceLogo from '../assets/media/intuiface-logo.png';
+import expert from '../assets/media/image2.png';
+import gallery1 from '../assets/media/266354878_1871287613042626_8673524322770208186_n.jpg';
+import gallery2 from '../assets/media/UWSP-Welcome-Center-scaled.jpg';
+import gallery3 from '../assets/media/StBarnabas-ScheduleBoard-scaled.jpg';
+import gallery4 from '../assets/media/RealEyesRosalindInstall-scaled.jpg';
+import gallery5 from '../assets/media/PXL_20210302_204112585-scaled.jpg';
+import gallery6 from '../assets/media/PXL_20210302_194125616-scaled.jpg';
+import gallery7 from '../assets/media/Matc-Gallery-2-scaled.jpg';
+import gallery8 from '../assets/media/Matc-Gallery-1-scaled.jpg';
+import gallery9 from '../assets/media/IMG_20241209_134718-4-scaled.jpg';
+import iconLocal from '../assets/media/INicos_0006_4ID_0038_icuun-copy-4-1.png';
+import iconSponsor from '../assets/media/INicos_0005_4ID_0039_icuun-copy-3-1.png';
+import iconCoupon from '../assets/media/INicos_0004_4ID_0040_icuun-copy-2-1.png';
+import iconHistory from '../assets/media/INicos_0003_4ID_0041_icuun-copy.png';
+import iconStory from '../assets/media/INicos_0002_4ID_0042_icuun-copy-5.png';
+import iconWayfinding from '../assets/media/INicos_0001_4ID_0043_icuun-copy-6.png';
+import iconSchedule from '../assets/media/INicos_0000_4ID_0044_icuun-copy-7.png';
+
+const commonIcons = [iconLocal, iconSponsor, iconCoupon, iconHistory, iconStory, iconWayfinding, iconSchedule];
+
+const industries = [
+  { label: 'Chamber of Commerce / Tourism', title: 'Chamber of Commerce / Tourism', description: 'An interactive display works like a 24/7 interactive tour guide for your visitors. Educate about local points of interest, promote businesses, share history with parallax timelines and digital storytelling.', image: chamber, imageAlt: 'Tourism interactive kiosk', icons: commonIcons },
+  { label: 'Events & Tradeshows', title: 'Events & Tradeshows', description: 'An interactive display can function in many ways for your event. Collect visitor information through quizzes and interactive games, prize giveaways, and educate about products or events related to your organization. Create meaningful interactions when the hype is high!', image: events, imageAlt: 'Interactive event display', icons: commonIcons },
+  { label: 'Office Buildings / High Rise', title: 'Office Buildings / High Rise', description: 'For many high-rise buildings, there’s more than meets the eye. Use 3D wayfinding to direct visitors quickly and efficiently, educate them about all your building has to offer, capture leads, and share agent contact information.', image: office, imageAlt: 'Office interactive display', icons: commonIcons.slice(2) },
+  { label: 'Corporate Headquarters', title: 'Corporate Headquarters', description: 'Interactive displays pair well with a full digital signage system in your corporate headquarters. Welcome important visitors, communicate company values and history, and connect 3D wayfinding, directories, and room reservations.', image: corporate, imageAlt: 'Corporate headquarters interactive display', icons: commonIcons },
+  { label: 'University / Campus', title: 'University / Campus', description: 'Create an end-to-end experience for current students, prospective students, visitors, alumni, and donors. Welcome centers engage newcomers, kiosks direct traffic, donor displays inspire giving, and internal displays keep staff informed.', image: university, imageAlt: 'University interactive display', icons: commonIcons },
+  { label: 'Church / House of Worship', title: 'Church / House of Worship', description: 'Interactive displays make newcomers feel welcome, donors appreciated, and existing members more engaged. Visitors can learn about programs and history, view photo galleries, sign up for events, and stay connected.', image: church, imageAlt: 'Church interactive display', icons: commonIcons.slice(1, 6) },
+  { label: 'Exhibit / Museum', title: 'Exhibit / Museum', description: 'Extend the exhibit experience with sensors, lights, buttons and more. Help visitors make the most of their visit with 3D wayfinding, historical and themed storytelling, AI connections, and memorable hands-on interactions.', image: museum, imageAlt: 'Museum interactive display', icons: commonIcons },
+];
+
+const process = [
+  { label: 'Free Consultation', image: consultation, text: 'We’ll ask questions, listen, and present lots of options to design your display.' },
+  { label: 'Content Guideline', image: contentGuideline, text: 'A rough draft of what content you have and how much. We’ll provide a blank template, essentially a bullet-point document, to easily organize everything.' },
+  { label: 'Design Scope', image: designScope, text: 'We’ll review, annotate, and update your content guideline, which becomes the initial design scope. We’ll assign a number of hours to build it and discuss any changes needed.' },
+  { label: 'Estimate & Order', image: estimate, text: 'We’ll create a formal estimate of costs for all hardware and services we’re providing, along with approximate delivery times. Order with confidence, and we’ll get to work.' },
+  { label: 'Design, Hardware Setup, Shipping', image: shipping, text: 'Your RealEyes TV Players will be registered, updated, configured for plug-and-play, and tested for 24 hours before shipping.' },
+  { label: 'Connect & Install', image: installation, text: 'Displays and hardware are installed, then HDMI, power, and internet bring your RealEyes Display to life.' },
+  { label: 'Training & Support', image: training, text: 'We monitor and support your players and hardware, solve most issues remotely, and train registered users as part of your subscription.' },
+];
+---
+
+<BaseLayout
+  title="Interactive Digital Signage | RealEyes Displays"
+  description="Custom interactive digital signage, kiosks, wayfinding, storytelling, directories, and touchscreen experiences for almost any industry."
+  image={hero.src}
+>
+  <IndustryHero image={hero} alt="Interactive digital signage installed in a lobby" />
+  <div class="red-band hero-band" data-reveal="up"><h1>Custom Interactive Experiences For Almost Any Industry</h1></div>
+  <div class="site-shell"><IndustryTabs id="interactive-industries" tabs={industries} /></div>
+
+  <div class="red-band section-space" data-reveal="down"><h2>Elegant Design with Your Audience in Mind</h2></div>
+  <section class="experience site-shell page-pad">
+    <div class="video-feature"><VideoCard title="Directory & Room Status Tablets" poster={poster1} youtubeId="mErXlGSCNLw" /></div>
+    <div class="experience-copy">
+      <p><strong>Engaging</strong> – Eye-catching, animated content your audience can see, hear, and touch.</p>
+      <p><strong>Opt-in Content</strong> – Visitors choose what to explore, making your message more effective.</p>
+      <p><strong>Tracking</strong> – Know what content works best with built-in touch analytics.</p>
+      <p><strong>Intuitive</strong> – Easy for all ages to use, from kids to seniors.</p>
+      <p><strong>Web-Connected &amp; Scalable</strong> – Update anytime, manage multiple screens, and add users with ease.</p>
+      <p><strong>System Integration</strong> – Seamlessly connect to your existing data and keep content updated automatically.</p>
+    </div>
+    <VideoCard title="Interactive digital signage turns passive viewers into active participants." poster={poster2} youtubeId="NgnXAGa7Qbs" />
+    <VideoCard title="It delivers personalized, on-demand information in real time." poster={poster3} youtubeId="uzwWirFZ5Oo" />
+  </section>
+
+  <div class="site-shell section-space"><GalleryCarousel dark coverflow images={[gallery1, gallery2, gallery3, gallery4, gallery5, gallery6, gallery7, gallery8, gallery9]} label="Interactive display installations" /></div>
+
+  <div class="site-shell section-space">
+    <ProcessTabs items={process} intro="We’ve refined our process over the years for maximum efficiency, accurate setup, and beautiful displays. Interactive displays have a few extra steps to define the interactive scope, and we’re with you every step of the way." />
+  </div>
+
+  <div class="red-band section-space" data-reveal="up"><h2>Scaling for large deployments?</h2></div>
+  <h2 class="scale-copy">No Problem! We provide a scope of manageable milestones,<br />executing from start to finish</h2>
+
+  <section class="intuiface site-shell" style={`--intuiface-bg: url(${intuifaceBg.src})`}>
+    <div class="intuiface-top">
+      <div data-reveal="left">
+        <Image src={intuifaceWhite} alt="Intuiface" loading="lazy" />
+        <h2>Platinum Partner</h2>
+        <p>Alex, owner of RealEyes Displays, is one of the earliest designer-developers with the Intuiface Platform.</p>
+      </div>
+      <Image src={expert} alt="Intuiface expert" loading="lazy" />
+    </div>
+    <h2>What is Intuiface? We’re glad you asked.</h2>
+    <p>Intuiface is an interactive software platform. It’s primarily used for interactive digital signage, but its triggers and actions create extraordinary freedom—from video-wall control panels and surveys to sensors, lighting, buttons, AI connections, and beyond.</p>
+  </section>
+
+  <section class="intuiface-help site-shell page-pad">
+    <Image src={intuifaceLogo} alt="Intuiface" loading="lazy" />
+    <div>
+      <h2>Already an Intuiface user? Need help?</h2>
+      <p>You can book Alex for advanced training sessions, consultations, or to build your project from start to finish. If you’re new and learning, we highly suggest taking the free Intuiface Academy courses first.</p>
+    </div>
+  </section>
+
+  <section class="soft-panel site-shell more-help" data-reveal="up">
+    <h2>Don’t see your organization or the display type you need?</h2>
+    <p>Don’t worry! We support almost all industries and all signage displays that we deploy.</p>
+    <p>Consultations are free, easy and educational. <strong>We promise.</strong></p>
+    <div>Use the buttons below to schedule a call:</div>
+  </section>
+  <div class="site-shell cta-section"><CTAButtons /></div>
+</BaseLayout>
+
+<style>
+  .hero-band { margin-top: -35px; }
+
+  .experience {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 38px;
+    padding-top: 35px;
+  }
+
+  .experience-copy {
+    padding: 45px 20px;
+    font-size: 18px;
+  }
+
+  .video-feature { min-height: 520px; }
+
+  .scale-copy {
+    margin: 45px 20px;
+    color: var(--red);
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    text-align: center;
+  }
+
+  .intuiface {
+    padding: 55px;
+    color: #fff;
+    background: #132a35 var(--intuiface-bg) center / cover no-repeat;
+  }
+
+  .intuiface-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .intuiface-top > div > :global(img) { width: 220px; }
+  .intuiface-top > :global(img) { width: 100%; max-height: 420px; object-fit: contain; }
+  .intuiface h2 { font-size: clamp(2rem, 4vw, 3rem); }
+  .intuiface p { max-width: 1050px; font-size: 20px; }
+
+  .intuiface-help {
+    display: grid;
+    grid-template-columns: 32% 1fr;
+    align-items: center;
+    gap: 40px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .intuiface-help > :global(img) { width: 100%; max-height: 170px; object-fit: contain; }
+  .intuiface-help h2 { color: var(--red); }
+
+  .more-help { margin-top: 35px; }
+  .more-help h2 { color: var(--red); font-size: clamp(2rem, 4vw, 2.8rem); }
+  .more-help p { margin-bottom: 8px; font-size: 22px; }
+  .more-help > div { margin-top: 30px; border-radius: 12px; padding: 18px; color: #fff; background: var(--ink); text-align: center; }
+  .cta-section { padding: 45px 0 5px; }
+
+  @media (max-width: 767px) {
+    .hero-band { margin-top: -18px; }
+    .experience { grid-template-columns: 1fr; }
+    .video-feature { min-height: 0; }
+    .intuiface { margin-inline: 10px; padding: 30px 20px; }
+    .intuiface-top, .intuiface-help { grid-template-columns: 1fr; }
+    .more-help { margin-inline: 10px; }
+    .more-help p { font-size: 18px; }
+  }
+</style>

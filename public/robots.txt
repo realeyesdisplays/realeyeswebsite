@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://realeyesdisplays.com/sitemap-index.xml
