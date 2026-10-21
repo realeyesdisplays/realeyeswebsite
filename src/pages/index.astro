@@ -12,7 +12,6 @@ import support from '../assets/media/support.png';
 import interactiveDisplay from '../assets/media/interactivedisplat2.png';
 import passiveDisplay from '../assets/media/Untitled-2.png';
 import clientLogos from '../assets/media/logos.png';
-import quote from '../assets/media/quote1.png';
 import showcase from '../assets/media/section-image.jpg';
 import kioskIcon from '../assets/media/Kiosk-Icon-Color.png';
 import gallery from '../assets/media/group2.jpg';
@@ -87,7 +86,6 @@ const strengths = [
       “Coming into interactive/digital projects like this can be very overwhelming. This was not the case with Alex and RealEyes Displays. Alex is extremely friendly, professional, and project oriented. He will be there every step of the way to make sure you get exactly what you are looking for.”
       <footer><cite>— Steven, USAFA Foundation</cite></footer>
     </blockquote>
-    <Image class="quote-mark" src={quote} alt="" loading="lazy" />
   </section>
 
   <section class="showcase site-shell">
@@ -132,7 +130,7 @@ const strengths = [
   .home-hero h1 {
     position: absolute;
     top: 220px;
-    left: 20px;
+    left: max(20px, calc((100% - 1240px) / 2 + 20px));
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -361,13 +359,6 @@ const strengths = [
     font-weight: 500;
   }
 
-  .quote-mark {
-    position: absolute;
-    right: 10px;
-    bottom: 20px;
-    width: 100px;
-  }
-
   .showcase {
     width: 100%;
     aspect-ratio: 1920 / 911;
@@ -495,7 +486,6 @@ const strengths = [
     }
 
     .client-logos,
-    .quote-mark,
     .showcase {
       display: none;
     }
