@@ -15,6 +15,7 @@ import designLoop from '../assets/media/Timelapse-Desk-720-10-White-GIF.gif';
 import deviceIcon from '../assets/media/icon-rdevice-1.png';
 import deviceCutout from '../assets/media/Q5ISbTD-scaled-depositphotos-bgremover-1.png';
 import peopleIcon from '../assets/media/icon-rdevice-3.png';
+import peopleSupport from '../assets/media/image-2.png';
 
 const strengths = [[software, 'Enterprise Software'], [design, 'Expert Design'], [device, 'Device Support'], [support, 'People Support']] as const;
 ---
@@ -45,26 +46,26 @@ const strengths = [[software, 'Enterprise Software'], [design, 'Expert Design'],
   </section>
 
   <section class="software-panel site-shell section-space" data-reveal="up">
-    <div class="software-title">
-      <Image src={stackIcon} alt="" loading="lazy" />
-      <h2>Enterprise<br />Software</h2>
-      <Image class="badge" src={intuifaceBadge} alt="Intuiface Creative Expert Platinum" loading="lazy" />
+    <div class="software-content">
+      <div class="software-title">
+        <h2><Image src={stackIcon} alt="" loading="lazy" /> Enterprise Software</h2>
+        <Image class="badge" src={intuifaceBadge} alt="Intuiface Creative Expert Platinum" loading="lazy" />
+      </div>
+      <div class="software-stack">
+        <h3>Here’s a few of the tools in our stack:</h3>
+        <p>Like a passionate woodworker, we trust our tools to bring life to our art. Our art is digital interactive signage.</p>
+        <div class="stack-logos">
+          <Image src={knack} alt="Knack" loading="lazy" />
+          <Image src={hybrid} alt="Hybrid Sync" loading="lazy" />
+          <Image src={logo} alt="RealEyes Displays" loading="lazy" />
+        </div>
+      </div>
     </div>
-    <div class="software-stack">
-      <h3>Here’s a few of the tools in our stack:</h3>
-      <p>Like a passionate woodworker, we trust our tools to bring life to our art. Our art is digital interactive signage.</p>
-      <div class="stack-logos">
-        <Image src={intuifaceBadge} alt="Intuiface" loading="lazy" />
-        <Image src={knack} alt="Knack" loading="lazy" />
-        <Image src={hybrid} alt="Hybrid Sync" loading="lazy" />
-        <Image src={logo} alt="RealEyes Displays" loading="lazy" />
-      </div>
-      <div class="stack-labels">
-        <span>Visual Experience,<br />Integration</span>
-        <span>Data, Portals,<br />Automation</span>
-        <span>Offline Data Sync</span>
-        <span>Passive Signage</span>
-      </div>
+    <div class="stack-labels">
+      <span>Visual Experience, Integration</span>
+      <span>Data, Portals, Automation</span>
+      <span>Offline Data Sync</span>
+      <span>Passive Signage</span>
     </div>
   </section>
 
@@ -82,20 +83,16 @@ const strengths = [[software, 'Enterprise Software'], [design, 'Expert Design'],
 
   <section class="support-panel site-shell section-space" data-reveal="up">
     <h2><Image src={deviceIcon} alt="" loading="lazy" /> Device Support</h2>
-    <div class="support-grid">
-      <div>
-        <h3>“Great, I’d love to support more devices!”<br />…said no IT manager, ever.</h3>
-        <div class="black-card">
-          <p>If we provide the hardware for your display system, you can count on us to monitor it, and when things happen, WE take the first call.</p>
-          <p>Most support tickets we take are fixed without any involvement from IT. And if your IT staff is worth their weight in gold…that saves you a LOT of gold!</p>
-        </div>
-      </div>
-      <Image src={deviceCutout} alt="Supported display devices" loading="lazy" />
+    <h3>“Great, I’d love to support more devices!”<br />…said no IT manager, ever.</h3>
+    <div class="black-card support-card">
+      <p>If we provide the hardware for your display system, you can count on us to monitor it, and when things happen, WE take the first call.</p>
+      <p>Most support tickets we take are fixed without any involvement from IT. And if your IT staff is worth their weight in gold…that saves you a LOT of gold!</p>
     </div>
+    <Image class="device-cutout" src={deviceCutout} alt="Supported interactive display kiosk" loading="lazy" />
   </section>
 
   <section class="people-panel site-shell section-space" data-reveal="up">
-    <div class="people-empty"></div>
+    <div class="people-media"><Image src={peopleSupport} alt="A customer enjoying a friendly video support call" loading="lazy" /></div>
     <div class="people-copy">
       <h2><Image src={peopleIcon} alt="" loading="lazy" /> People Support</h2>
       <h3>Have you ever had a good laugh on a support call?</h3>
@@ -111,7 +108,9 @@ const strengths = [[software, 'Enterprise Software'], [design, 'Expert Design'],
   .roots-hero {
     display: grid;
     grid-template-columns: 40% 60%;
-    min-height: 765px;
+    width: 90vw;
+    max-width: none;
+    min-height: 700px;
     padding-top: 145px;
     border-radius: 0 0 18px 18px;
     color: #fff;
@@ -121,7 +120,7 @@ const strengths = [[software, 'Enterprise Software'], [design, 'Expert Design'],
   .roots-heading,
   .roots-copy {
     align-self: center;
-    padding: 35px;
+    padding: 35px clamp(35px, 4vw, 75px);
   }
 
   .roots-heading h1 {
@@ -153,6 +152,7 @@ const strengths = [[software, 'Enterprise Software'], [design, 'Expert Design'],
 
   .strength {
     position: relative;
+    min-height: 108px;
     padding: 48px 10px 15px;
     background: var(--red);
     text-align: center;
@@ -177,71 +177,92 @@ const strengths = [[software, 'Enterprise Software'], [design, 'Expert Design'],
   }
 
   .software-panel {
-    display: grid;
-    grid-template-columns: 28% 1fr;
+    width: 90vw;
+    max-width: none;
     border: 2px solid var(--red);
     border-radius: 14px;
-    padding: 30px;
+    padding: 28px 28px 10px;
+  }
+
+  .software-content {
+    display: grid;
+    grid-template-columns: 26% 1fr;
+    gap: 30px;
   }
 
   .software-title h2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
     color: var(--red);
-    font-size: 42px;
+    font-size: clamp(1.8rem, 2.7vw, 2.65rem);
     font-weight: 450;
+    white-space: nowrap;
   }
 
-  .software-title > :global(img) {
-    width: 58px;
+  .software-title h2 :global(img) {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
   }
 
   .software-title .badge,
   .software-title :global(.badge) {
-    width: 100%;
-    margin-top: 20px;
+    width: min(100%, 285px);
+    max-height: 280px;
+    margin: 6px auto -6px;
+    object-fit: contain;
   }
 
   .software-stack h3 {
-    font-size: 31px;
+    margin-bottom: 14px;
+    font-size: clamp(1.4rem, 2vw, 2rem);
   }
 
   .software-stack > p {
-    font-size: 23px;
+    font-size: clamp(1rem, 1.45vw, 1.35rem);
     font-weight: 600;
   }
 
-  .stack-logos,
-  .stack-labels {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-  }
-
   .stack-logos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(30px, 5vw, 95px);
     align-items: center;
-    min-height: 210px;
+    min-height: 230px;
+    padding-inline: 20px;
   }
 
   .stack-logos :global(img) {
     width: 100%;
-    max-height: 170px;
+    max-height: 160px;
     object-fit: contain;
   }
 
   .stack-labels {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
     border-radius: 12px;
-    padding: 20px;
+    padding: 18px 22px;
     background: var(--red);
   }
 
   .stack-labels span {
-    padding: 18px 8px;
+    display: grid;
+    min-height: 52px;
+    padding: 10px 8px;
     background: #eee;
     text-align: center;
+    place-items: center;
   }
 
   .feature-split {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    width: 90vw;
+    max-width: none;
     overflow: hidden;
     border: 2px solid var(--charcoal);
     border-radius: 15px;
@@ -249,17 +270,20 @@ const strengths = [[software, 'Enterprise Software'], [design, 'Expert Design'],
 
   .feature-media {
     display: grid;
-    min-height: 600px;
-    padding: 20px;
+    min-height: 460px;
+    padding: 0 28px;
     place-items: end center;
   }
 
   .feature-media :global(img) {
     width: 100%;
+    max-height: 450px;
+    object-fit: contain;
+    object-position: bottom;
   }
 
   .feature-copy {
-    padding: 40px 25px;
+    padding: 38px 24px 30px;
   }
 
   .feature-copy.dark {
@@ -288,10 +312,10 @@ const strengths = [[software, 'Enterprise Software'], [design, 'Expert Design'],
 
   .black-card {
     border-radius: 10px;
-    padding: 25px;
+    padding: 22px;
     color: #fff;
     background: #202020;
-    font-size: 20px;
+    font-size: clamp(1rem, 1.25vw, 1.2rem);
   }
 
   .red-card {
@@ -303,7 +327,12 @@ const strengths = [[software, 'Enterprise Software'], [design, 'Expert Design'],
   }
 
   .support-panel {
-    padding: 55px;
+    position: relative;
+    width: 90vw;
+    max-width: none;
+    min-height: 455px;
+    overflow: hidden;
+    padding: 40px 34px 32px;
     border-radius: 14px;
     background: var(--soft);
   }
@@ -312,24 +341,58 @@ const strengths = [[software, 'Enterprise Software'], [design, 'Expert Design'],
     color: var(--red);
   }
 
-  .support-grid {
-    display: grid;
-    grid-template-columns: 1fr 34%;
-    align-items: center;
-    gap: 40px;
+  .support-panel > h3 {
+    margin: 58px 0 34px;
+    font-size: clamp(1.25rem, 1.9vw, 1.8rem);
   }
 
-  .support-grid > :global(img) {
-    width: 100%;
+  .support-card {
+    position: relative;
+    z-index: 1;
+    min-height: 150px;
+    margin: 0;
+    padding-right: min(32vw, 470px);
+  }
+
+  .device-cutout,
+  .support-panel > :global(.device-cutout) {
+    position: absolute;
+    z-index: 2;
+    right: clamp(35px, 6vw, 110px);
+    bottom: 16px;
+    width: clamp(240px, 23vw, 365px);
+    max-height: 390px;
+    object-fit: contain;
   }
 
   .people-panel {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 620px;
+    grid-template-columns: 60% 40%;
+    width: 90vw;
+    max-width: none;
+    min-height: 520px;
+    overflow: hidden;
     border: 2px solid var(--charcoal);
     border-radius: 15px;
-    padding: 55px 30px;
+    padding: 0;
+  }
+
+  .people-media {
+    min-width: 0;
+  }
+
+  .people-media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .people-copy {
+    position: relative;
+    z-index: 1;
+    padding: 40px 34px;
+    background: #fff;
   }
 
   .people-copy h2 {
@@ -337,13 +400,20 @@ const strengths = [[software, 'Enterprise Software'], [design, 'Expert Design'],
   }
 
   .people-copy h3 {
-    margin: 70px 0 40px;
-    font-size: 28px;
+    margin: 58px 0 34px;
+    font-size: clamp(1.25rem, 1.8vw, 1.65rem);
+  }
+
+  .people-copy .red-card {
+    width: calc(100% + 34px);
+    margin-left: -105px;
+    padding-left: 28px;
   }
 
   @media (max-width: 767px) {
     .roots-hero {
       grid-template-columns: 1fr;
+      width: calc(100% - 20px);
       min-height: 1050px;
       padding-top: 40px;
       background-position: 30% center;
@@ -363,27 +433,43 @@ const strengths = [[software, 'Enterprise Software'], [design, 'Expert Design'],
       display: none;
     }
 
-    .software-panel,
+    .software-content,
     .feature-split,
-    .support-grid,
     .people-panel {
       grid-template-columns: 1fr;
     }
 
     .software-panel {
-      margin-inline: 10px;
+      width: calc(100% - 20px);
       padding: 24px 16px;
     }
 
-    .stack-logos,
+    .software-title h2 {
+      white-space: normal;
+    }
+
+    .software-title .badge,
+    .software-title :global(.badge) {
+      width: min(72%, 250px);
+    }
+
+    .stack-logos {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      min-height: 150px;
+      padding-inline: 0;
+    }
+
     .stack-labels {
       grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 12px;
     }
 
     .feature-split,
     .support-panel,
     .people-panel {
-      margin-inline: 10px;
+      width: calc(100% - 20px);
     }
 
     .feature-media {
@@ -391,15 +477,48 @@ const strengths = [[software, 'Enterprise Software'], [design, 'Expert Design'],
     }
 
     .support-panel {
+      min-height: auto;
       padding: 30px 20px;
     }
 
-    .people-panel {
-      min-height: 550px;
+    .support-panel > h3 {
+      margin: 38px 0 28px;
     }
 
-    .people-empty {
-      display: none;
+    .support-card {
+      min-height: auto;
+      padding-right: 22px;
+    }
+
+    .device-cutout,
+    .support-panel > :global(.device-cutout) {
+      position: relative;
+      right: auto;
+      bottom: auto;
+      width: min(78%, 320px);
+      margin: -10px auto 0;
+    }
+
+    .people-panel {
+      min-height: 0;
+    }
+
+    .people-media {
+      min-height: 300px;
+    }
+
+    .people-copy {
+      padding: 30px 20px;
+    }
+
+    .people-copy h3 {
+      margin: 38px 0 28px;
+    }
+
+    .people-copy .red-card {
+      width: 100%;
+      margin-left: 0;
+      padding-left: 24px;
     }
   }
 </style>
