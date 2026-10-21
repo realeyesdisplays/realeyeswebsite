@@ -149,7 +149,21 @@ import logo from '../assets/media/logo.png';
     }
 
     .footer-nav {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
       margin-top: 62px;
+    }
+
+    .footer-nav a {
+      display: grid;
+      width: 100%;
+      min-height: 42px;
+      border: 1px solid rgb(38 38 38 / 14%);
+      border-radius: 7px;
+      padding: 8px 12px;
+      background: rgb(255 255 255 / 70%);
+      place-items: center;
     }
 
     .footer-wordmark {
