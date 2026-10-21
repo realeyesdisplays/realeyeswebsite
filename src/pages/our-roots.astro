@@ -110,8 +110,8 @@ const strengths = [[software, 'Enterprise Software'], [design, 'Expert Design'],
     grid-template-columns: 40% 60%;
     width: 90vw;
     max-width: none;
-    min-height: 700px;
-    padding-top: 145px;
+    min-height: 650px;
+    padding-top: 120px;
     border-radius: 0 0 18px 18px;
     color: #fff;
     background: var(--ink) var(--roots-bg) center / cover no-repeat;
@@ -123,7 +123,7 @@ const strengths = [[software, 'Enterprise Software'], [design, 'Expert Design'],
   }
 
   .roots-heading {
-    padding: 35px;
+    padding: 35px 55px;
   }
 
   .roots-copy {
@@ -153,7 +153,8 @@ const strengths = [[software, 'Enterprise Software'], [design, 'Expert Design'],
   .strengths {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 36px;
+    width: min(100%, clamp(440px, 45.84vw, 587px));
+    gap: 30px;
     margin-top: 60px;
   }
 
@@ -367,8 +368,8 @@ const strengths = [[software, 'Enterprise Software'], [design, 'Expert Design'],
     z-index: 2;
     right: clamp(35px, 6vw, 110px);
     bottom: 16px;
-    width: clamp(240px, 23vw, 365px);
-    max-height: 390px;
+    width: clamp(270px, 25vw, 405px);
+    max-height: 425px;
     object-fit: contain;
   }
 
