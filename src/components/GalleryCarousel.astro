@@ -6,17 +6,18 @@ interface Props {
   label: string;
   dark?: boolean;
   coverflow?: boolean;
+  scrollable?: boolean;
 }
 
-const { images, label, dark = false, coverflow = false } = Astro.props;
+const { images, label, dark = false, coverflow = false, scrollable = false } = Astro.props;
 ---
 
-<section class:list={['carousel', { dark, coverflow }]} aria-label={label} data-carousel>
+<section class:list={['carousel', { dark, coverflow, scrollable }]} aria-label={label} data-carousel>
   <button class="carousel-arrow previous" type="button" aria-label="Previous image" data-carousel-prev>‹</button>
   <div class="carousel-window">
     <div class="carousel-track" data-carousel-track>
       {images.map((image, index) => (
-        <figure class="carousel-slide" aria-hidden={index > 2 ? 'true' : 'false'}>
+        <figure class="carousel-slide" aria-hidden={scrollable ? 'false' : index > 2 ? 'true' : 'false'}>
           <Image src={image} alt={`${label} ${index + 1}`} loading="lazy" quality={82} />
         </figure>
       ))}
@@ -28,8 +29,20 @@ const { images, label, dark = false, coverflow = false } = Astro.props;
 <script>
   document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((carousel) => {
     const track = carousel.querySelector<HTMLElement>('[data-carousel-track]');
+    const windowElement = carousel.querySelector<HTMLElement>('.carousel-window');
     const slides = [...carousel.querySelectorAll<HTMLElement>('.carousel-slide')];
     if (!track || slides.length < 2) return;
+
+    if (carousel.classList.contains('scrollable') && windowElement) {
+      const move = (direction: number) => {
+        const slideWidth = slides[0]?.getBoundingClientRect().width ?? windowElement.clientWidth;
+        windowElement.scrollBy({ left: slideWidth * direction, behavior: 'smooth' });
+      };
+      carousel.querySelector('[data-carousel-next]')?.addEventListener('click', () => move(1));
+      carousel.querySelector('[data-carousel-prev]')?.addEventListener('click', () => move(-1));
+      return;
+    }
+
     let index = 0;
     let timer: number;
     const visible = () => window.matchMedia('(max-width: 767px)').matches ? 1 : 3;
@@ -89,6 +102,19 @@ const { images, label, dark = false, coverflow = false } = Astro.props;
     overflow: hidden;
   }
 
+  .scrollable .carousel-window {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-color: var(--red) #ece8e5;
+    scrollbar-width: thin;
+  }
+
+  .scrollable .carousel-window::-webkit-scrollbar { height: 10px; }
+  .scrollable .carousel-window::-webkit-scrollbar-track { border-radius: 10px; background: #ece8e5; }
+  .scrollable .carousel-window::-webkit-scrollbar-thumb { border-radius: 10px; background: var(--red); }
+
   .carousel-track {
     display: flex;
     transition: transform 500ms ease;
@@ -98,6 +124,10 @@ const { images, label, dark = false, coverflow = false } = Astro.props;
     flex: 0 0 33.333%;
     margin: 0;
     padding: 10px;
+  }
+
+  .scrollable .carousel-slide {
+    scroll-snap-align: start;
   }
 
   .carousel-slide :global(img) {

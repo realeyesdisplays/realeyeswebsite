@@ -24,17 +24,55 @@ import training from '../assets/media/Training.png';
 import slide1 from '../assets/media/slide1.jpg';
 import slide2 from '../assets/media/slide2.jpg';
 import slide3 from '../assets/media/slide3.jpg';
+import galleryConvention from '../assets/media/266354878_1871287613042626_8673524322770208186_n.jpg';
+import galleryRecent from '../assets/media/IMG_20241209_134718-4-scaled.jpg';
+import galleryMatc1 from '../assets/media/Matc-Gallery-1-scaled.jpg';
+import galleryMatc2 from '../assets/media/Matc-Gallery-2-scaled.jpg';
+import galleryPxl1 from '../assets/media/PXL_20210302_194125616-scaled.jpg';
+import galleryPxl2 from '../assets/media/PXL_20210302_204112585-scaled.jpg';
+import galleryRosalind from '../assets/media/RealEyesRosalindInstall-scaled.jpg';
+import galleryStBarnabas from '../assets/media/StBarnabas-ScheduleBoard-scaled.jpg';
+import galleryUwsp from '../assets/media/UWSP-Welcome-Center-scaled.jpg';
+import galleryAga2 from '../assets/media/gallery-aga-2.jpg';
+import galleryAga3 from '../assets/media/gallery-aga-3.jpg';
+import galleryCourtNorth from '../assets/media/gallery-court-north.jpg';
+import gallery2020 from '../assets/media/gallery-2020-install.jpg';
+import galleryAugustana from '../assets/media/gallery-augustana.jpg';
+import galleryChamber from '../assets/media/chamerb1.png';
+import galleryEvent from '../assets/media/eventshow1.png';
+import galleryMuseum from '../assets/media/musem.png';
 import iconDirectory from '../assets/media/PasIcons_0016_REPD_0032_icuun-copy-4.png';
 import iconLobby from '../assets/media/PasIcons_0015_REPD_0033_icuun-copy-3.png';
 import iconConference from '../assets/media/PasIcons_0014_REPD_0034_icuun-copy-2.png';
 import iconCafe from '../assets/media/PasIcons_0004_REPD_0023_icuun-copy.png';
 import iconBreak from '../assets/media/PasIcons_0012_REPD_0036_icuun.png';
 import iconFacility from '../assets/media/PasIcons_0011_REPD_0037_icuun-copy-5.png';
-import iconEvents from '../assets/media/PasIcons_0007_REPD_0020_icuun-copy-4.png';
-import iconSchedule from '../assets/media/PasIcons_0006_REPD_0021_icuun-copy-3.png';
+import iconPerson from '../assets/media/PasIcons_0007_REPD_0020_icuun-copy-4.png';
+import iconCampusLobby from '../assets/media/PasIcons_0006_REPD_0021_icuun-copy-3.png';
+import iconHallway from '../assets/media/PasIcons_0005_REPD_0022_icuun-copy-2.png';
+import iconResident from '../assets/media/PasIcons_0003_REPD_0024_icuun.png';
+import iconTransit from '../assets/media/PasIcons_0000_REPD_0027_icuun-copy-6.png';
+import iconHallFame from '../assets/media/PasIcons_0017_REPD_0028_icuun-copy-8.png';
+import iconSeniorCafe from '../assets/media/PasIcons_0013_REPD_0035_icuun-copy.png';
+import iconFlex from '../assets/media/PasIcons_0002_REPD_0025_icuun-copy-5.png';
+import iconMail from '../assets/media/PasIcons_0001_REPD_0026_icuun-copy-7.png';
+import iconPrice from '../assets/media/PasIcons_0010_REPD_0009_icuun-copy.png';
+import iconChiro from '../assets/media/PasIcons_0009_REPD_0010_icuun.png';
+import iconVet from '../assets/media/PasIcons_0008_REPD_0011_icuun-copy-5.png';
 
 const commonIcons = [iconDirectory, iconLobby, iconConference, iconCafe, iconBreak, iconFacility];
-const campusIcons = [iconEvents, iconSchedule, iconLobby, iconCafe, iconBreak, iconFacility];
+const corporateIcons = [iconDirectory, iconLobby, iconConference, iconSeniorCafe, iconBreak, iconFacility];
+const campusIcons = [iconPerson, iconCampusLobby, iconHallway, iconCafe, iconResident, iconTransit, iconHallFame];
+const seniorIcons = [iconPerson, iconCampusLobby, iconHallway, iconSeniorCafe, iconResident, iconFlex, iconMail];
+const churchIcons = [iconPerson, iconCampusLobby, iconHallway, iconCafe, iconFlex];
+const clinicIcons = [iconLobby, iconBreak, iconPrice, iconChiro, iconVet];
+
+const deploymentGallery = [
+  slide1, slide2, slide3, galleryConvention, galleryRecent,
+  galleryMatc1, galleryMatc2, galleryPxl1, galleryPxl2, galleryRosalind,
+  galleryStBarnabas, galleryUwsp, galleryAga2, galleryAga3, galleryCourtNorth,
+  gallery2020, galleryAugustana, galleryChamber, galleryEvent, galleryMuseum,
+];
 
 const industries = [
   {
@@ -51,12 +89,13 @@ const industries = [
     description: 'Enhance communications in your corporate headquarters with a network of passive displays. Welcome important visitors who enter the lobby and provide professional info-tainment. Communicate staff meetings, HR updates and safety info through your break room TV, and much more.',
     image: corporate,
     imageAlt: 'Corporate headquarters digital signage',
-    icons: commonIcons,
+    icons: corporateIcons,
+    centerText: true,
   },
   {
     label: 'University Campus',
     title: 'University Campus',
-    description: 'Want more engagement with your campus TV system? Add flair to your TVs and keep students watching. Welcome visitors at the entrances, schedule important information and events through hallways, pull dynamically scheduled menu boards, connect emergency alerts, and send our software through dorm room TVs.',
+    description: 'Want more engagement with your campus TV system? Add flair to your TVs and keep students watching. Welcome visitors at the entrances, schedule important information and events through hallways, pull dynamically scheduled menu boards, pipe a custom channel to your website, connect emergency alerts, and send our software through dorm room TVs on a cable insertion channel.',
     image: university,
     imageAlt: 'University campus signage',
     icons: campusIcons,
@@ -64,10 +103,11 @@ const industries = [
   {
     label: 'Senior Living',
     title: 'Senior Living',
-    description: 'We provide a gentle, reliable way to share updates throughout common areas and living spaces. Keep residents and visitors informed with daily menus, activity schedules, announcements, birthdays, anniversaries and readable, easy-to-manage content.',
+    description: 'We provide a gentle, reliable way to share updates throughout common areas and living spaces. Keep residents and visitors informed with daily menus, activity schedules, and important announcements. Recognize residents, manage a full birthday/anniversary list, show daily menus and more. Easily control fonts, page durations, and text sizes for readability.',
     image: senior,
     imageAlt: 'Senior living digital signage',
-    icons: campusIcons,
+    icons: seniorIcons,
+    centerText: true,
   },
   {
     label: 'Church / House of Worship',
@@ -75,15 +115,17 @@ const industries = [
     description: 'A house of worship nowadays is a multi-faceted community space. Share service times, event schedules, and announcements in a clear and welcoming way—ideal for keeping members informed as they move through entryways, halls, and gathering spaces.',
     image: church,
     imageAlt: 'Church welcome signage',
-    icons: campusIcons,
+    icons: churchIcons,
+    centerText: true,
   },
   {
     label: 'Clinic & Personal Services',
     title: 'Clinic & Health Services',
-    description: 'Whether you’re a veterinary practice, primary care, vision correction, plastic surgery and more, we’ll help visitors feel welcome, at ease, and educated on your services. Display wellness tips, insurance information, common questions, testimonials, QR codes, videos, and more.',
+    description: 'Whether you’re a veterinary practice, primary care, vision correction, plastic surgery and more, we’ll help your visitors feel welcome, at ease, and educated on your services. Display wellness tips, insurance info, common questions, testimonials, appointment/newsletter QR codes, videos, and more.',
     image: clinic,
     imageAlt: 'Clinic digital signage',
-    icons: commonIcons,
+    icons: clinicIcons,
+    centerText: true,
   },
 ];
 
@@ -134,7 +176,7 @@ const process = [
 
   <div class="red-band section-space" data-reveal="up"><h2>Scaling for large deployments?</h2></div>
   <h2 class="scale-copy">No problem! We provide a scope of manageable milestones,<br />executing from start to finish.</h2>
-  <div class="site-shell"><GalleryCarousel images={[slide1, slide2, slide3]} label="Large deployment examples" /></div>
+  <div class="site-shell"><GalleryCarousel scrollable images={deploymentGallery} label="Large deployment examples" /></div>
 
   <section class="soft-panel site-shell more-help" data-reveal="up">
     <h2>Don’t see your organization or the display type you need?</h2>

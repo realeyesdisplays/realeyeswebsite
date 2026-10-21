@@ -8,6 +8,7 @@ interface TabItem {
   image: ImageMetadata;
   imageAlt: string;
   icons: ImageMetadata[];
+  centerText?: boolean;
 }
 
 interface Props {
@@ -42,21 +43,23 @@ const { tabs, id } = Astro.props;
     {tabs.map((tab, index) => (
       <article
         id={`${id}-panel-${index}`}
-        class="industry-panel"
+        class:list={['industry-panel', { reverse: index % 2 === 1, 'center-copy': tab.centerText }]}
         role="tabpanel"
         aria-labelledby={`${id}-tab-${index}`}
         hidden={index !== 0}
         data-tab-panel
       >
-        <div class="industry-visual">
-          <div class="icon-row" aria-hidden="true">
-            {tab.icons.map((icon) => <Image src={icon} alt="" loading="lazy" />)}
-          </div>
-          <Image class="industry-image" src={tab.image} alt={tab.imageAlt} loading="lazy" quality={84} />
+        <div class="icon-row" aria-hidden="true">
+          {tab.icons.map((icon) => <Image src={icon} alt="" loading="lazy" />)}
         </div>
-        <div class="industry-text">
-          <h2>{tab.title}</h2>
-          <p>{tab.description}</p>
+        <div class="industry-body">
+          <div class="industry-visual">
+            <Image class="industry-image" src={tab.image} alt={tab.imageAlt} loading="lazy" quality={84} />
+          </div>
+          <div class="industry-text">
+            <h2>{tab.title}</h2>
+            <p>{tab.description}</p>
+          </div>
         </div>
       </article>
     ))}
@@ -143,15 +146,11 @@ const { tabs, id } = Astro.props;
   }
 
   .tab-panels {
-    min-height: 490px;
-    padding: 80px 5% 45px;
+    min-height: 520px;
+    padding: 70px 5% 40px;
   }
 
   .industry-panel {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 30px;
     max-width: 1180px;
     margin-inline: auto;
   }
@@ -162,17 +161,28 @@ const { tabs, id } = Astro.props;
 
   .icon-row {
     display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    min-height: 82px;
-    margin-bottom: 12px;
+    justify-content: center;
+    gap: 8px;
+    min-height: 92px;
+    margin-bottom: 2px;
   }
 
   .icon-row :global(img) {
-    width: 72px;
-    height: 72px;
+    width: 102px;
+    height: 88px;
     object-fit: contain;
   }
+
+  .industry-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 30px;
+    min-height: 330px;
+  }
+
+  .industry-panel.reverse .industry-visual { order: 2; }
+  .industry-panel.reverse .industry-text { order: 1; }
 
   .industry-image :global(img),
   :global(.industry-image) {
@@ -191,6 +201,10 @@ const { tabs, id } = Astro.props;
   .industry-text p {
     font-size: 20px;
     line-height: 1.5;
+  }
+
+  .industry-panel.center-copy .industry-text p {
+    text-align: center;
   }
 
   @media (max-width: 767px) {
@@ -215,18 +229,26 @@ const { tabs, id } = Astro.props;
       padding: 38px 20px;
     }
 
-    .industry-panel {
+    .industry-body {
       grid-template-columns: 1fr;
+      min-height: 0;
     }
 
     .icon-row {
       flex-wrap: wrap;
       justify-content: center;
+      min-height: 0;
+      margin-bottom: 20px;
     }
 
     .icon-row :global(img) {
-      width: 52px;
-      height: 52px;
+      width: 74px;
+      height: 64px;
+    }
+
+    .industry-panel.reverse .industry-visual,
+    .industry-panel.reverse .industry-text {
+      order: initial;
     }
 
     .industry-text p {
