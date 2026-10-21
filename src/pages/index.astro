@@ -88,7 +88,7 @@ const strengths = [
     </blockquote>
   </section>
 
-  <section class="showcase site-shell">
+  <section class="showcase site-shell" data-parallax-showcase>
     <Image src={showcase} alt="Interactive distinguished graduate recognition display" loading="lazy" quality={86} />
   </section>
 
@@ -98,9 +98,37 @@ const strengths = [
       <h2>Got A Display Idea? Want To Talk To An Expert?</h2>
       <a class="button" href="/contact-us/">Contact Us</a>
     </div>
-    <Image class="contact-photo" src={gallery} alt="A room of installed interactive kiosks" loading="lazy" />
+    <div class="contact-photo">
+      <Image src={gallery} alt="A room of installed interactive kiosks" loading="lazy" />
+    </div>
   </section>
 </BaseLayout>
+
+<script>
+  const showcase = document.querySelector<HTMLElement>('[data-parallax-showcase]');
+  const showcaseImage = showcase?.querySelector<HTMLImageElement>('img');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let parallaxFrame = 0;
+
+  const updateParallax = () => {
+    parallaxFrame = 0;
+    if (!showcase || !showcaseImage || reduceMotion.matches) return;
+
+    const bounds = showcase.getBoundingClientRect();
+    const distance = window.innerHeight + bounds.height;
+    const progress = Math.min(1, Math.max(0, (window.innerHeight - bounds.top) / distance));
+    showcaseImage.style.setProperty('--parallax-y', `${progress * -18}%`);
+  };
+
+  const requestParallaxUpdate = () => {
+    if (!parallaxFrame) parallaxFrame = window.requestAnimationFrame(updateParallax);
+  };
+
+  window.addEventListener('scroll', requestParallaxUpdate, { passive: true });
+  window.addEventListener('resize', requestParallaxUpdate, { passive: true });
+  reduceMotion.addEventListener('change', requestParallaxUpdate);
+  updateParallax();
+</script>
 
 <style>
   .home-hero {
@@ -156,7 +184,8 @@ const strengths = [
     grid-template-columns: 40% 60%;
     min-height: 595px;
     margin-top: 10px;
-    width: min(calc(100% - 20px), calc(var(--content) - 20px));
+    width: 90vw;
+    max-width: none;
     overflow: hidden;
     border-radius: 12px;
     color: #fff;
@@ -361,15 +390,18 @@ const strengths = [
 
   .showcase {
     width: 100%;
-    aspect-ratio: 1920 / 911;
+    aspect-ratio: 1920 / 621;
     overflow: hidden;
   }
 
   .showcase :global(img) {
+    display: block;
     width: 100%;
-    height: 100%;
+    height: 122%;
     object-fit: cover;
     object-position: center;
+    transform: translate3d(0, var(--parallax-y, 0), 0);
+    will-change: transform;
   }
 
   .contact-panel {
@@ -401,12 +433,36 @@ const strengths = [
     text-transform: uppercase;
   }
 
-  .contact-photo :global(img),
-  :global(.contact-photo) {
-    width: 100%;
+  .contact-photo {
     height: 470px;
+    overflow: hidden;
     border-radius: 20px;
+  }
+
+  .contact-photo :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    transition: transform 450ms ease;
+  }
+
+  @media (hover: hover) {
+    .contact-photo:hover :global(img) {
+      transform: scale(1.045);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .showcase :global(img) {
+      height: 100%;
+      transform: none;
+      will-change: auto;
+    }
+
+    .contact-photo :global(img) {
+      transition: none;
+    }
   }
 
   @media (max-width: 767px) {
@@ -433,7 +489,8 @@ const strengths = [
     .roots-preview {
       grid-template-columns: 1fr;
       min-height: 980px;
-      margin-inline: 10px;
+      width: calc(100% - 20px);
+      margin-inline: auto;
       background-position: 38% center;
     }
 
@@ -502,8 +559,7 @@ const strengths = [
       padding: 24px;
     }
 
-    .contact-photo :global(img),
-    :global(.contact-photo) {
+    .contact-photo {
       height: 330px;
     }
   }
