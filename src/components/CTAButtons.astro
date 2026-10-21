@@ -5,17 +5,25 @@ import rehabDisplay from '../assets/media/newdisplay2.png';
 
 interface Props {
   compact?: boolean;
+  lightBackground?: boolean;
 }
 
-const { compact = false } = Astro.props;
+const { compact = false, lightBackground = false } = Astro.props;
+
+const details = [
+  'We’ll guide you, then support you.',
+  'Black screens? No support? We can help.',
+] as const;
 ---
 
-<div class:list={['cta-buttons', { compact }]}>
+<div class:list={['cta-buttons', { compact, 'on-light': lightBackground }]}>
   <button class="cta-card float-on-hover" type="button" data-form="new" data-reveal="left" aria-label="New Displays or Design Services">
     <Image src={newDisplay} alt="New Displays or Design Services" loading="lazy" />
+    {lightBackground && <span class="cta-detail">{details[0]}<i aria-hidden="true"></i></span>}
   </button>
   <button class="cta-card float-on-hover" type="button" data-form="rehab" data-reveal="right" aria-label="Rehab an existing system">
     <Image src={rehabDisplay} alt="Rehab an existing system" loading="lazy" />
+    {lightBackground && <span class="cta-detail">{details[1]}<i aria-hidden="true"></i></span>}
   </button>
 </div>
 
@@ -44,6 +52,32 @@ const { compact = false } = Astro.props;
     height: auto;
   }
 
+  .on-light .cta-detail {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    left: 18%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 38px;
+    padding: 6px 14px 6px 18px;
+    color: #fff;
+    background: #aaa;
+    font-size: clamp(.75rem, 1.3vw, 1rem);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .on-light .cta-detail i {
+    flex: 0 0 34px;
+    width: 34px;
+    height: 22px;
+    margin-left: 12px;
+    background: var(--ink);
+    clip-path: polygon(0 32%, 58% 32%, 58% 0, 100% 50%, 58% 100%, 58% 68%, 0 68%);
+  }
+
   .compact {
     width: min(1100px, calc(100% - 40px));
   }
@@ -56,5 +90,20 @@ const { compact = false } = Astro.props;
     }
 
     .cta-card { padding: 0; }
+
+    .on-light .cta-detail {
+      right: 0;
+      bottom: 0;
+      min-height: 28px;
+      padding: 4px 8px 4px 12px;
+      font-size: .72rem;
+    }
+
+    .on-light .cta-detail i {
+      flex-basis: 26px;
+      width: 26px;
+      height: 18px;
+      margin-left: 8px;
+    }
   }
 </style>

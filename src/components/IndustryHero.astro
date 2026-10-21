@@ -14,7 +14,7 @@ const { image, alt } = Astro.props;
   <div class="industry-copy" aria-label="One vendor. All of your signage displays. All of your users. Everywhere.">
     <p class="dark">One vendor.</p>
     <p>All of your<br />signage displays.</p>
-    <p class="dark">All of your<br />users.</p>
+    <p class="dark">All of your users.</p>
     <p>Everywhere.</p>
   </div>
 </section>
@@ -37,17 +37,19 @@ const { image, alt } = Astro.props;
   .industry-copy {
     position: absolute;
     top: 255px;
-    left: 10px;
+    left: max(20px, calc((100vw - 1240px) / 2 + 20px));
+    width: min(460px, calc(100% - 40px));
     color: #fff;
+    text-align: left;
     text-transform: uppercase;
     text-shadow: 0 2px 14px rgb(0 0 0 / 18%);
   }
 
   .industry-copy p {
-    margin: 0 0 18px;
-    font-size: clamp(2rem, 4.2vw, 3.75rem);
+    margin: 0 0 6px;
+    font-size: clamp(2rem, 2.55vw, 2.5rem);
     font-weight: 400;
-    line-height: 1.04;
+    line-height: 1.02;
     letter-spacing: .08em;
   }
 
@@ -67,6 +69,7 @@ const { image, alt } = Astro.props;
     .industry-copy {
       top: 215px;
       left: 20px;
+      width: calc(100% - 40px);
     }
 
     .industry-copy p {

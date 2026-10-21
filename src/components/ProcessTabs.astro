@@ -16,21 +16,23 @@ const { items, intro } = Astro.props;
 ---
 
 <section class="process soft-panel" data-process>
-  <h2 data-reveal="left">Our Proven Process</h2>
-  <p class="process-intro" data-reveal="left">{intro}</p>
-  <p class="process-note">We’ve refined our process over the years for maximum efficiency, accurate setup, and beautiful displays.</p>
-  <div class="process-tabs" role="tablist" aria-label="Our process">
-    {items.map((item, index) => (
-      <button type="button" role="tab" aria-selected={index === 0 ? 'true' : 'false'} data-process-button>{item.label}</button>
-    ))}
-  </div>
-  <div class="process-panels">
-    {items.map((item, index) => (
-      <div class="process-panel" role="tabpanel" hidden={index !== 0} data-process-panel>
-        <Image src={item.image} alt="" loading="lazy" />
-        <p>{item.text}</p>
-      </div>
-    ))}
+  <div class="process-inner">
+    <h2 data-reveal="left">Our Proven Process</h2>
+    <p class="process-intro" data-reveal="left">{intro}</p>
+    <p class="process-note">We’ve refined our process over the years for maximum efficiency, accurate setup, and beautiful displays.</p>
+    <div class="process-tabs" role="tablist" aria-label="Our process">
+      {items.map((item, index) => (
+        <button type="button" role="tab" aria-selected={index === 0 ? 'true' : 'false'} data-process-button>{item.label}</button>
+      ))}
+    </div>
+    <div class="process-panels">
+      {items.map((item, index) => (
+        <div class="process-panel" role="tabpanel" hidden={index !== 0} data-process-panel>
+          <Image src={item.image} alt="" loading="lazy" />
+          <p>{item.text}</p>
+        </div>
+      ))}
+    </div>
   </div>
 </section>
 
@@ -46,6 +48,18 @@ const { items, intro } = Astro.props;
 </script>
 
 <style>
+  .process {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    border-radius: 0;
+    padding-inline: 0;
+  }
+
+  .process-inner {
+    width: min(calc(100% - 40px), 1140px);
+    margin-inline: auto;
+  }
+
   .process h2 {
     margin-bottom: 20px;
     color: var(--red);

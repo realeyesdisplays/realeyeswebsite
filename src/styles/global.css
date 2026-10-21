@@ -84,7 +84,8 @@ h3 {
 .red-band {
   position: relative;
   z-index: 2;
-  margin: 0 20px;
+  width: min(100%, var(--content));
+  margin-inline: auto;
   padding: 18px 28px;
   border-radius: var(--radius);
   color: #fff;
@@ -198,7 +199,7 @@ h3 {
 
 @media (max-width: 767px) {
   .red-band {
-    margin-inline: 10px;
+    width: calc(100% - 20px);
     padding: 14px 16px;
     border-radius: 8px;
   }
