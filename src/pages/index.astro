@@ -408,7 +408,8 @@ const strengths = [
     display: grid;
     grid-template-columns: 46% 54%;
     gap: 20px;
-    width: min(calc(100% - 20px), calc(var(--content) - 20px));
+    width: 90vw;
+    max-width: none;
     margin-top: 30px;
     border-radius: 20px;
     padding: 30px;
@@ -555,7 +556,8 @@ const strengths = [
 
     .contact-panel {
       grid-template-columns: 1fr;
-      margin: 90px 10px 0;
+      width: calc(100% - 20px);
+      margin: 90px auto 0;
       padding: 24px;
     }
 
