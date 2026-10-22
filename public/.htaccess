@@ -4,6 +4,12 @@ ErrorDocument 404 /404.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
+
+  # Preserve links and search equity from the previous WordPress site.
+  RewriteRule ^interactive2/?$ /interactive/ [R=301,L]
+  RewriteRule ^contact/?$ /contact-us/ [R=301,L]
+  RewriteRule ^(?:wp-sitemap\.xml|sitemap\.xml)$ /sitemap-index.xml [R=301,L]
+
   RewriteCond %{HTTP_HOST} ^(?:www\.)?realeyesdisplays\.com$ [NC]
   RewriteCond %{HTTPS} !=on [OR]
   RewriteCond %{HTTP_HOST} ^www\.realeyesdisplays\.com$ [NC]
