@@ -89,6 +89,7 @@ const schema = {
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <meta name="robots" content={robotsContent} />
+    {isProduction && <meta name="google-site-verification" content="oEUz2Nw0cvxsFozQP5r-0V1eOkwdNeNMecwsqmhOSq4" />}
     <meta name="theme-color" content="#e23d3d" />
     <link rel="icon" type="image/png" href={logoMark.src} />
     <link rel="apple-touch-icon" href={logoMark.src} />
