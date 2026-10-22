@@ -90,8 +90,8 @@ const process = [
       <p><strong>Web-Connected &amp; Scalable</strong> – Update anytime, manage multiple screens, and add users with ease.</p>
       <p><strong>System Integration</strong> – Seamlessly connect to your existing data and keep content updated automatically.</p>
     </div>
-    <VideoCard title="Interactive digital signage turns passive viewers into active participants." poster={poster2} youtubeId="NgnXAGa7Qbs" />
-    <VideoCard title="It delivers personalized, on-demand information in real time." poster={poster3} youtubeId="uzwWirFZ5Oo" />
+    <VideoCard title="Delivering personalized, on demand information to visitors." poster={poster2} youtubeId="NgnXAGa7Qbs" />
+    <VideoCard title="Turn passive viewers into active participants." poster={poster3} youtubeId="uzwWirFZ5Oo" />
   </section>
 
   <div class="gallery-band section-space">
@@ -110,7 +110,7 @@ const process = [
       <div class="intuiface-partner" data-reveal="left">
         <Image src={intuifaceWhite} alt="Intuiface" loading="lazy" />
         <h2>Platinum Partner</h2>
-        <p>Alex, owner of RealEyes Displays, is one of the earliest designer-developers with the Intuiface Platform.</p>
+        <p>Alex, owner of RealEyes Displays, is one of the earliest designer-developers with the<br />Intuiface&nbsp;Platform.</p>
       </div>
       <Image class="intuiface-expert" src={expert} alt="Alex, RealEyes Displays’ Intuiface expert" loading="lazy" />
       <blockquote class="intuiface-quote">
@@ -129,7 +129,7 @@ const process = [
     <Image src={intuifaceLogo} alt="Intuiface" loading="lazy" />
     <div>
       <h2>Already an Intuiface user? Need help?</h2>
-      <p>You can book Alex for advanced training sessions, consultations, or to build your project from start to finish. If you’re new and learning, we highly suggest taking the free Intuiface Academy courses first.</p>
+      <p>You can book Alex for advanced training sessions, consultations, or to build your project from start to finish. If you’re new and learning, we highly suggest taking the free <a href="https://academy.intuiface.com/" target="_blank" rel="noopener" data-analytics="intuiface_academy_click">Intuiface Academy</a> courses first.</p>
     </div>
   </section>
 
@@ -206,8 +206,14 @@ const process = [
     margin-bottom: 24px;
   }
 
-  .intuiface-partner { text-align: right; }
-  .intuiface-partner > :global(img) { width: min(100%, 220px); }
+  .intuiface-partner {
+    display: grid;
+    justify-items: center;
+    text-align: left;
+  }
+  .intuiface-partner > :global(img),
+  .intuiface-partner h2,
+  .intuiface-partner p { width: min(100%, 220px); }
   .intuiface-partner h2 { margin: 8px 0; }
   .intuiface-partner p { margin: 0; }
   .intuiface-expert { width: 100%; max-height: 330px; object-fit: contain; }
@@ -235,6 +241,7 @@ const process = [
 
   .intuiface-help > :global(img) { width: 100%; max-height: 170px; object-fit: contain; }
   .intuiface-help h2 { color: var(--red); }
+  .intuiface-help a { color: inherit; text-underline-offset: 3px; }
 
   .more-help { margin-top: 35px; }
   .more-help h2 { color: var(--red); font-size: clamp(2rem, 4vw, 2.8rem); }
@@ -248,7 +255,7 @@ const process = [
     .video-feature { min-height: 0; }
     .intuiface { width: calc(100% - 20px); margin-inline: auto; padding: 30px 20px; }
     .intuiface-top, .intuiface-help { grid-template-columns: 1fr; }
-    .intuiface-partner { text-align: center; }
+    .intuiface-partner { justify-items: center; text-align: center; }
     .intuiface-copy { padding-inline: 0; }
     .more-help { width: calc(100% - 20px); margin-inline: auto; }
     .more-help p { font-size: 18px; }
