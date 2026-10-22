@@ -12,7 +12,7 @@ import videoWall from '../assets/media/VideoWallCut-1.jpg';
   description="Contact RealEyes Displays for new displays, design services, system rehabilitation, existing-client support, and partnership inquiries."
   image={videoWall.src}
 >
-  <section class="map-hero site-shell">
+  <section class="map-hero">
     <iframe
       title="Map of RealEyes Displays in Bloomington, Minnesota"
       src="https://www.google.com/maps?q=7900%20International%20Drive%20Suite%20300%20Bloomington%20MN%2055425&output=embed"
@@ -34,29 +34,37 @@ import videoWall from '../assets/media/VideoWallCut-1.jpg';
     </article>
   </section>
 
-  <section class="contact-instructions site-shell">
-    <p>For the fastest service, please use the buttons below to send us an inquiry.</p>
-    <p>For general questions, please use the “New Display or Design Services” button.</p>
-  </section>
+  <div class="contact-instructions-band">
+    <section class="contact-instructions site-shell">
+      <p>For the fastest service, please use the buttons below to send us an inquiry.</p>
+      <p>For general questions, please use the “New Display or Design Services” button.</p>
+    </section>
+  </div>
 
-  <section class="contact-actions site-shell"><CTAButtons compact /></section>
+  <div class="contact-actions-band">
+    <section class="contact-actions site-shell"><CTAButtons compact /></section>
+  </div>
 
-  <section class="support-link site-shell">
-    <p>If you have a RealEyes Display and need support, please <a href="https://forms.clickup.com/2246062/f/24hde-540/UMTSNY7RWFBPIX1QTA" target="_blank" rel="noopener" data-analytics="support_form_click">CLICK HERE</a></p>
-  </section>
+  <div class="support-link-band">
+    <section class="support-link site-shell">
+      <p>If you have a RealEyes Display and need support, please <a href="https://forms.clickup.com/2246062/f/24hde-540/UMTSNY7RWFBPIX1QTA" target="_blank" rel="noopener" data-analytics="support_form_click">CLICK HERE</a></p>
+    </section>
+  </div>
 
-  <section class="trust site-shell">
-    <h2>Trusted for 20+ years:</h2>
-    <p>We make digital signage simple, effective, and stress-free. From eye-catching passive displays to engaging interactive kiosks, we deliver solutions for every industry—backed by helpful, friendly support you can count on. Trusted by end users and partners nationwide, we’re here to help you create displays that work as beautifully as they look.</p>
-  </section>
+  <div class="trust-band">
+    <section class="trust site-shell">
+      <h2>Trusted for 20+ years:</h2>
+      <p>We make digital signage simple, effective, and stress-free. From eye-catching passive displays to engaging interactive kiosks, we deliver solutions for every industry—backed by helpful, friendly support you can count on. Trusted by end users and partners nationwide, we’re here to help you create displays that work as beautifully as they look.</p>
+    </section>
+  </div>
 
-  <section class="contact-photo site-shell"><Image src={videoWall} alt="RealEyes digital display video wall" loading="lazy" /></section>
+  <section class="contact-photo"><Image src={videoWall} alt="RealEyes digital display video wall" loading="lazy" /></section>
 </BaseLayout>
 
 <style>
   .map-hero {
-    height: 565px;
-    padding-top: 0;
+    width: 100%;
+    height: 600px;
     background: #f7f7f7;
   }
 
@@ -66,14 +74,14 @@ import videoWall from '../assets/media/VideoWallCut-1.jpg';
     border: 0;
   }
 
-  .contact-band { margin-top: 0; }
+  .contact-band { margin-top: -35px; }
 
   .contact-details {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    max-width: 1000px;
-    padding: 55px 30px;
+    gap: 0;
+    max-width: 950px;
+    padding: 50px 0 40px;
   }
 
   .contact-details article {
@@ -83,8 +91,8 @@ import videoWall from '../assets/media/VideoWallCut-1.jpg';
   }
 
   .contact-details article > :global(img) {
-    width: 72px;
-    height: 72px;
+    width: 85px;
+    height: 85px;
     object-fit: contain;
   }
 
@@ -99,10 +107,12 @@ import videoWall from '../assets/media/VideoWallCut-1.jpg';
     text-decoration: none;
   }
 
-  .contact-instructions {
-    padding: 40px 60px;
+  .contact-instructions-band,
+  .support-link-band {
     background: var(--paper);
   }
+
+  .contact-instructions { padding: 40px 60px; }
 
   .contact-instructions p {
     margin-bottom: 8px;
@@ -110,13 +120,14 @@ import videoWall from '../assets/media/VideoWallCut-1.jpg';
     font-weight: 500;
   }
 
-  .contact-actions {
-    padding: 55px 20px;
+  .contact-actions-band {
     background: var(--charcoal);
   }
 
+  .contact-actions { padding: 50px 90px; }
+
   .support-link {
-    padding: 40px 20px;
+    padding: 40px 60px;
     text-align: center;
   }
 
@@ -126,33 +137,41 @@ import videoWall from '../assets/media/VideoWallCut-1.jpg';
     font-weight: 650;
   }
 
+  .trust-band {
+    color: #fff;
+    background: var(--red);
+  }
+
   .trust {
     padding: 50px 30px;
     color: #fff;
-    background: var(--red);
   }
 
   .trust h2 { font-size: 34px; }
   .trust p { max-width: 1200px; margin: 0; font-size: 22px; line-height: 1.65; }
 
   .contact-photo {
-    min-height: 500px;
-    padding-top: 55px;
+    width: 100%;
+    min-height: 400px;
   }
 
   .contact-photo :global(img) {
     width: 100%;
-    height: 500px;
+    height: 400px;
     object-fit: cover;
   }
 
   @media (max-width: 767px) {
-    .map-hero { height: 350px; }
+    .map-hero { height: 400px; }
+    .contact-band { margin-top: 0; }
     .contact-details { grid-template-columns: 1fr; gap: 35px; padding: 40px 25px; }
+    .contact-details article { flex-direction: column; text-align: center; }
+    .contact-details article > :global(img) { width: 60px; height: 60px; }
     .contact-instructions { padding: 30px 20px; }
     .contact-instructions p, .support-link p, .trust p { font-size: 18px; }
-    .contact-actions { padding-inline: 0; }
-    .contact-photo { min-height: 320px; }
-    .contact-photo :global(img) { height: 320px; }
+    .contact-actions { padding: 40px 0; }
+    .support-link { padding: 30px; }
+    .contact-photo { min-height: 187px; }
+    .contact-photo :global(img) { height: 187px; }
   }
 </style>
