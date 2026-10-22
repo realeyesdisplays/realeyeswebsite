@@ -5,7 +5,19 @@ export const prerender = true;
 export const GET: APIRoute = () => {
   const production = import.meta.env.PUBLIC_SITE_ENV === 'production';
   const body = production
-    ? 'User-agent: *\nAllow: /\n\nSitemap: https://realeyesdisplays.com/sitemap-index.xml\n'
+    ? [
+        'User-agent: OAI-SearchBot',
+        'Allow: /',
+        '',
+        'User-agent: GPTBot',
+        'Disallow: /',
+        '',
+        'User-agent: *',
+        'Allow: /',
+        '',
+        'Sitemap: https://realeyesdisplays.com/sitemap-index.xml',
+        '',
+      ].join('\n')
     : 'User-agent: *\nDisallow: /\n';
 
   return new Response(body, {

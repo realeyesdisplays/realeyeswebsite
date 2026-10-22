@@ -27,10 +27,16 @@ The static production site is written to `dist/`. Hostinger should publish the c
 Copy `.env.example` to `.env` and set the existing GA4 measurement ID:
 
 ```text
-PUBLIC_GA4_MEASUREMENT_ID=G-XXXXXXXXXX
+PUBLIC_GA4_MEASUREMENT_ID=G-EBSGYCH5KC
 ```
 
-The analytics script is omitted when this value is blank, so local development does not pollute production reporting. Local and staging builds should use `PUBLIC_SITE_ENV=staging`; production must explicitly set `PUBLIC_SITE_ENV=production`. Staging builds receive `noindex` metadata and a crawler-blocking `robots.txt` automatically.
+The production build also falls back to the same public measurement ID if the variable is omitted. Local and staging builds do not load analytics, preventing preview traffic from polluting production reporting. Local and staging builds should use `PUBLIC_SITE_ENV=staging`; production must explicitly set `PUBLIC_SITE_ENV=production`. Staging builds receive `noindex` metadata and a crawler-blocking `robots.txt` automatically.
+
+## Search and AI discovery
+
+Production builds generate the XML sitemap, canonical URLs, social metadata, Organization/WebSite structured data, and `/llms.txt`. The production crawler policy allows standard search crawlers and `OAI-SearchBot`, while blocking `GPTBot`. Preview builds remain blocked from indexing.
+
+The footer currently links to the existing RealEyes Passive Signage privacy policy at `https://realeyes.playr.biz/en/privacy_policy`. Replace that link with the new RealEyes Displays website privacy page when it is ready.
 
 ## Deployment
 

@@ -2,13 +2,18 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Page Not Found | RealEyes Displays" description="The requested page could not be found.">
-  <main class="not-found page-pad site-shell">
+<BaseLayout
+  title="Page Not Found | RealEyes Displays"
+  description="The requested page could not be found."
+  robots="noindex, follow"
+  structuredData={false}
+>
+  <section class="not-found page-pad site-shell">
     <p class="eyebrow">404</p>
     <h1>We couldn’t find that display.</h1>
     <p>The page may have moved during our website update.</p>
     <a class="button" href="/">Return Home</a>
-  </main>
+  </section>
 </BaseLayout>
 
 <style>
