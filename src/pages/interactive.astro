@@ -16,9 +16,9 @@ import corporate from '../assets/media/office-hq.png';
 import university from '../assets/media/universitycamp.png';
 import church from '../assets/media/Church-1-1.png';
 import museum from '../assets/media/musem.png';
-import poster1 from '../assets/media/4ID_0056_play-1.png';
-import poster2 from '../assets/media/4ID_0057_play-2.png';
-import poster3 from '../assets/media/4ID_0058_play-3.png';
+import poster1 from '../assets/media/youtube-mErXlGSCNLw.jpg';
+import poster2 from '../assets/media/youtube-NgnXAGa7Qbs.jpg';
+import poster3 from '../assets/media/youtube-uzwWirFZ5Oo.jpg';
 import consultation from '../assets/media/Consultation.png';
 import contentGuideline from '../assets/media/Content-Guideline-pic-1.png';
 import designScope from '../assets/media/Design-Scope-1.png';
@@ -94,7 +94,9 @@ const process = [
     <VideoCard title="It delivers personalized, on-demand information in real time." poster={poster3} youtubeId="uzwWirFZ5Oo" />
   </section>
 
-  <div class="site-shell section-space"><GalleryCarousel dark coverflow images={[gallery1, gallery2, gallery3, gallery4, gallery5, gallery6, gallery7, gallery8, gallery9]} label="Interactive display installations" /></div>
+  <div class="gallery-band section-space">
+    <div class="site-shell"><GalleryCarousel dark coverflow images={[gallery1, gallery2, gallery3, gallery4, gallery5, gallery6, gallery7, gallery8, gallery9]} label="Interactive display installations" /></div>
+  </div>
 
   <div class="site-shell section-space">
     <ProcessTabs items={process} intro="We’ve refined our process over the years for maximum efficiency, accurate setup, and beautiful displays. Interactive displays have a few extra steps to define the interactive scope, and we’re with you every step of the way." />
@@ -105,15 +107,22 @@ const process = [
 
   <section class="intuiface site-shell" style={`--intuiface-bg: url(${intuifaceBg.src})`}>
     <div class="intuiface-top">
-      <div data-reveal="left">
+      <div class="intuiface-partner" data-reveal="left">
         <Image src={intuifaceWhite} alt="Intuiface" loading="lazy" />
         <h2>Platinum Partner</h2>
         <p>Alex, owner of RealEyes Displays, is one of the earliest designer-developers with the Intuiface Platform.</p>
       </div>
-      <Image src={expert} alt="Intuiface expert" loading="lazy" />
+      <Image class="intuiface-expert" src={expert} alt="Alex, RealEyes Displays’ Intuiface expert" loading="lazy" />
+      <blockquote class="intuiface-quote">
+        <p>“RealEyes Displays is one of our earliest creative experts, with over 13 years of experience. Alex and his team find elegant ways to solve technical challenges, and their output always has a signature polish.”</p>
+        <cite>Seb M., Intuiface Customer Success Manager</cite>
+      </blockquote>
     </div>
     <h2>What is Intuiface? We’re glad you asked.</h2>
-    <p>Intuiface is an interactive software platform. It’s primarily used for interactive digital signage, but its triggers and actions create extraordinary freedom—from video-wall control panels and surveys to sensors, lighting, buttons, AI connections, and beyond.</p>
+    <div class="intuiface-copy">
+      <p>Intuiface is an interactive software platform. It’s primarily used for interactive digital signage, but it has a suite of triggers and actions that lend amazing creative freedom to the designer. Build video-wall control panels, corporate presentations, directories, product showcases, itinerary builders, halls of fame, and data-driven experiences—all triggered instantaneously from a tablet 1,000 miles away.</p>
+      <p>We’ve spent over a decade with Intuiface as our platform of choice for its creative and integration freedom, ease of deployment, company support, and culture of giving in its design community. Leverage our experience and success for your next project.</p>
+    </div>
   </section>
 
   <section class="intuiface-help site-shell page-pad">
@@ -165,6 +174,15 @@ const process = [
 
   .video-feature { min-height: 0; }
 
+  .gallery-band {
+    width: 100%;
+    background: #494949;
+  }
+
+  .gallery-band :global(.carousel.dark) {
+    background: transparent;
+  }
+
   .scale-copy {
     margin: 45px 20px;
     color: var(--red);
@@ -173,22 +191,38 @@ const process = [
   }
 
   .intuiface {
-    padding: 55px;
+    padding: 40px;
+    border-radius: 18px;
+    overflow: hidden;
     color: #fff;
     background: #132a35 var(--intuiface-bg) center / cover no-repeat;
   }
 
   .intuiface-top {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(220px, .9fr) minmax(220px, .75fr) minmax(280px, 1.2fr);
     align-items: center;
-    gap: 30px;
+    gap: 24px;
+    margin-bottom: 24px;
   }
 
-  .intuiface-top > div > :global(img) { width: 220px; }
-  .intuiface-top > :global(img) { width: 100%; max-height: 420px; object-fit: contain; }
-  .intuiface h2 { font-size: clamp(2rem, 4vw, 3rem); }
-  .intuiface p { max-width: 1050px; font-size: 20px; }
+  .intuiface-partner { text-align: right; }
+  .intuiface-partner > :global(img) { width: min(100%, 220px); }
+  .intuiface-partner h2 { margin: 8px 0; }
+  .intuiface-partner p { margin: 0; }
+  .intuiface-expert { width: 100%; max-height: 330px; object-fit: contain; }
+  .intuiface-quote {
+    margin: 0;
+    border-radius: 12px;
+    padding: 24px;
+    color: #def6ff;
+    background: rgb(255 255 255 / 25%);
+  }
+  .intuiface-quote p { margin-top: 0; font-size: 16px; }
+  .intuiface-quote cite { color: #85ddf0; font-style: normal; font-weight: 700; }
+  .intuiface > h2 { margin: 16px 0; font-size: clamp(2rem, 4vw, 3rem); text-align: center; }
+  .intuiface p { font-size: 18px; }
+  .intuiface-copy { padding-inline: 34px; text-align: center; }
 
   .intuiface-help {
     display: grid;
@@ -214,6 +248,8 @@ const process = [
     .video-feature { min-height: 0; }
     .intuiface { width: calc(100% - 20px); margin-inline: auto; padding: 30px 20px; }
     .intuiface-top, .intuiface-help { grid-template-columns: 1fr; }
+    .intuiface-partner { text-align: center; }
+    .intuiface-copy { padding-inline: 0; }
     .more-help { width: calc(100% - 20px); margin-inline: auto; }
     .more-help p { font-size: 18px; }
   }
