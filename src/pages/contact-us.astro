@@ -15,7 +15,7 @@ import videoWall from '../assets/media/VideoWallCut-1.jpg';
   <section class="map-hero">
     <iframe
       title="Map of RealEyes Displays in Bloomington, Minnesota"
-      src="https://www.google.com/maps?q=7900%20International%20Drive%20Suite%20300%20Bloomington%20MN%2055425&output=embed"
+      src="https://www.google.com/maps?q=44.859587,-93.226503&z=16&output=embed"
       loading="eager"
       referrerpolicy="no-referrer-when-downgrade"
     ></iframe>
@@ -47,18 +47,27 @@ import videoWall from '../assets/media/VideoWallCut-1.jpg';
 
   <div class="support-link-band">
     <section class="support-link site-shell">
-      <p>If you have a RealEyes Display and need support, please <a href="https://forms.clickup.com/2246062/f/24hde-540/UMTSNY7RWFBPIX1QTA" target="_blank" rel="noopener" data-analytics="support_form_click">CLICK HERE</a></p>
+      <p>If you have a RealEyes Display and need support, please <a href="https://forms.clickup.com/2246062/f/24hde-540/UMTSNY7RWFBPIX1QTA" data-form="support" data-analytics="support_form_click">CLICK HERE</a></p>
     </section>
   </div>
 
   <div class="trust-band">
     <section class="trust site-shell">
-      <h2>Trusted for 20+ years:</h2>
+      <div class="trust-heading">
+        <svg class="trust-icon" viewBox="0 0 32 32" aria-hidden="true">
+          <circle cx="16" cy="16" r="14"></circle>
+          <g transform="translate(4 4)">
+            <path d="M7 10v12"></path>
+            <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"></path>
+          </g>
+        </svg>
+        <h2>Trusted for 20+ years:</h2>
+      </div>
       <p>We make digital signage simple, effective, and stress-free. From eye-catching passive displays to engaging interactive kiosks, we deliver solutions for every industry—backed by helpful, friendly support you can count on. Trusted by end users and partners nationwide, we’re here to help you create displays that work as beautifully as they look.</p>
     </section>
   </div>
 
-  <section class="contact-photo"><Image src={videoWall} alt="RealEyes digital display video wall" loading="lazy" /></section>
+  <section class="contact-photo" data-parallax-photo><Image src={videoWall} alt="RealEyes digital display video wall" loading="lazy" data-parallax-image /></section>
 </BaseLayout>
 
 <style>
@@ -112,7 +121,7 @@ import videoWall from '../assets/media/VideoWallCut-1.jpg';
     background: var(--paper);
   }
 
-  .contact-instructions { padding: 40px 60px; }
+  .contact-instructions { padding: 40px 110px; }
 
   .contact-instructions p {
     margin-bottom: 8px;
@@ -147,18 +156,42 @@ import videoWall from '../assets/media/VideoWallCut-1.jpg';
     color: #fff;
   }
 
-  .trust h2 { font-size: 34px; }
+  .trust-heading {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .trust-icon {
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .trust h2 { margin: 0; font-size: 34px; }
   .trust p { max-width: 1200px; margin: 0; font-size: 22px; line-height: 1.65; }
 
   .contact-photo {
     width: 100%;
     min-height: 400px;
+    position: relative;
+    overflow: hidden;
   }
 
   .contact-photo :global(img) {
+    position: absolute;
+    top: -60px;
+    left: 0;
     width: 100%;
-    height: 400px;
+    height: 520px;
     object-fit: cover;
+    will-change: transform;
   }
 
   @media (max-width: 767px) {
@@ -171,7 +204,47 @@ import videoWall from '../assets/media/VideoWallCut-1.jpg';
     .contact-instructions p, .support-link p, .trust p { font-size: 18px; }
     .contact-actions { padding: 40px 0; }
     .support-link { padding: 30px; }
+    .trust-heading { align-items: flex-start; gap: 10px; }
+    .trust-icon { width: 40px; height: 40px; flex-basis: 40px; }
     .contact-photo { min-height: 187px; }
-    .contact-photo :global(img) { height: 187px; }
+    .contact-photo :global(img) { top: -30px; height: 247px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-photo :global(img) {
+      transform: none !important;
+      will-change: auto;
+    }
   }
 </style>
+
+<script>
+  const photo = document.querySelector<HTMLElement>('[data-parallax-photo]');
+  const image = photo?.querySelector<HTMLElement>('[data-parallax-image]');
+
+  if (photo && image && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let framePending = false;
+
+    const updateParallax = () => {
+      const rect = photo.getBoundingClientRect();
+      const availableTravel = Math.max(0, (image.offsetHeight - photo.offsetHeight) / 2);
+      const pageCenter = window.innerHeight / 2;
+      const photoCenter = rect.top + rect.height / 2;
+      const progress = (photoCenter - pageCenter) / ((window.innerHeight + rect.height) / 2);
+      const offset = Math.max(-availableTravel, Math.min(availableTravel, -progress * availableTravel));
+
+      image.style.transform = `translate3d(0, ${offset}px, 0)`;
+      framePending = false;
+    };
+
+    const requestUpdate = () => {
+      if (framePending) return;
+      framePending = true;
+      window.requestAnimationFrame(updateParallax);
+    };
+
+    updateParallax();
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+  }
+</script>
