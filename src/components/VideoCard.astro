@@ -12,10 +12,12 @@ const { title, poster, youtubeId } = Astro.props;
 
 <article class="video-card" data-video-card>
   <h3>{title}</h3>
-  <button type="button" class="video-poster" aria-label={`Play ${title}`} data-video-id={youtubeId}>
-    <Image src={poster} alt="" loading="lazy" />
-    <span aria-hidden="true">▶</span>
-  </button>
+  <div class="video-frame">
+    <button type="button" class="video-poster" aria-label={`Play ${title}`} data-video-id={youtubeId}>
+      <Image src={poster} alt="" loading="lazy" />
+      <span aria-hidden="true">▶</span>
+    </button>
+  </div>
 </article>
 
 <script>
@@ -35,10 +37,21 @@ const { title, poster, youtubeId } = Astro.props;
 
 <style>
   .video-card h3 {
-    min-height: 48px;
-    margin-bottom: 12px;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto 14px;
+    border-bottom: 2px solid #111;
+    padding: 0 4px 5px;
+    color: var(--red);
     font-size: 18px;
     text-align: center;
+  }
+
+  .video-frame {
+    border-radius: 18px;
+    padding: 12px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #111 0%, #111 90%, var(--red) 100%);
   }
 
   .video-poster,
@@ -54,6 +67,12 @@ const { title, poster, youtubeId } = Astro.props;
     overflow: hidden;
     background: #111;
     cursor: pointer;
+  }
+
+  .video-poster,
+  .video-card :global(iframe) {
+    display: block;
+    border-radius: 10px;
   }
 
   .video-poster :global(img) {

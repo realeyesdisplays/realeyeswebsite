@@ -130,7 +130,7 @@ const process = [
     <p>Consultations are free, easy and educational. <strong>We promise.</strong></p>
     <div>Use the buttons below to schedule a call:</div>
   </section>
-  <div class="site-shell cta-section"><CTAButtons /></div>
+  <div class="site-shell cta-section"><CTAButtons lightBackground /></div>
 </BaseLayout>
 
 <style>
@@ -139,16 +139,31 @@ const process = [
   .experience {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 38px;
+    gap: 28px 38px;
     padding-top: 35px;
   }
 
   .experience-copy {
-    padding: 45px 20px;
+    align-self: start;
+    border: 1px solid #aaa;
+    border-radius: 16px;
+    padding: 28px;
+    background: #eee;
     font-size: 18px;
   }
 
-  .video-feature { min-height: 520px; }
+  .experience-copy p:first-child { margin-top: 0; }
+  .experience-copy p:last-child { margin-bottom: 0; }
+
+  .experience-copy strong {
+    transition: color 220ms ease;
+  }
+
+  .experience-copy strong:hover {
+    color: var(--red);
+  }
+
+  .video-feature { min-height: 0; }
 
   .scale-copy {
     margin: 45px 20px;
